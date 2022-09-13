@@ -2,7 +2,7 @@
 
 |Member|Key Feature|
 |-----|-----|
-|Alex Sobieraj |Create Account
+|Alex Sobieraj |Create Account|
 |-----|-----|
 |#####|Log in/out|
 |-----|-----|
@@ -14,4 +14,5 @@
 |-----|-----|
 |#####|Frontend|
 |-----|-----|
+
 
