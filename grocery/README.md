@@ -5,7 +5,7 @@
 |Alex Sobieraj |Create Account|
 |#####|Log in/out|
 |#####|Search|
-|#####|Add/Remove items|
+|Feng Wang|Add/Remove items|
 |#####|Validation|
 |#####|Frontend|
 
