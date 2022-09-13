@@ -9,30 +9,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import se452.project.grocery.Entities.Account;
 import se452.project.grocery.Services.AccountService;
 
-
 @Controller
-public class LoginController {
+public class AccountController {
 	
 	@Autowired
 	AccountService accountService;
 	
-	@RequestMapping("/")
-	public String loginPage() {
-		return "loginPage";
-	}
-	
-	@PostMapping("/login")
-	public String homePage(Account account, Model model) {
+	@PostMapping("/createAccount")
+	public String createAccount(Account account, Model model) {
 		System.out.println(account.getEmail());
 		System.out.println(account.getPassword());
 		
-		boolean loggedIn = accountService.loginAccount(account);
-		if(loggedIn) {
-			model.addAttribute("msg", "Welcome");
-			return "homePage";
+		boolean accountCreated = accountService.createAccount(account);
+		if(accountCreated) {
+			model.addAttribute("createAccountStatus", "Account created!");
 		}
-		model.addAttribute("msg", "Wrong info");
+		else {
+			model.addAttribute("createAccountStatus", "Account cannot be created!");
+
+		}
 		return "loginPage";
+	}
+	
+	@RequestMapping("/createAccountPage")
+	public String createAccountPage() {
+		return "createAccountPage";
 	}
 
 }
