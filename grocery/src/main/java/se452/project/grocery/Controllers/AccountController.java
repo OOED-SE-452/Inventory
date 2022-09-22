@@ -25,8 +25,7 @@ public class AccountController {
 			model.addAttribute("createAccountStatus", "Account created!");
 		}
 		else {
-			model.addAttribute("createAccountStatus", "Account cannot be created!");
-
+			model.addAttribute("createAccountStatus", "Account already exist!");
 		}
 		return "loginPage";
 	}

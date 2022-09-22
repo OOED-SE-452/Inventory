@@ -1,6 +1,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 <h1>Create Account</h1>
+<h1 th:text="${createAccountStatus}"></h1>
 <form action="/createAccount" method="POST" th:object="${account}">
 <input type="text" name="email"/>
 <input type="password" name="password" />
