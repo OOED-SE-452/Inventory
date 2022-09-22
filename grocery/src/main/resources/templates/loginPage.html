@@ -2,6 +2,7 @@
 <body>
 <h1>Login</h1>
 <h1 th:text="${msg}"></h1>
+<h1 th:text="${createAccountStatus}"></h1>
 <form action="/login" method="POST" th:object="${account}">
 <input type="text" name="email"/>
 <input type="password" name="password" />
