@@ -4,7 +4,7 @@
 | -------------- | ---------------- |
 | Alex Sobieraj  | Create Account   |
 | Hassan Tanveer | Log in/out       |
-| #####          | Search           |
+| Simone Scaratti| Search           |
 | Feng Wang      | Add/Remove items |
-| Ali Adam        | Validation       |
+| Ali Adam       | Validation       |
 | #####          | Frontend         |
