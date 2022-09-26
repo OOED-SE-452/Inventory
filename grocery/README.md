@@ -6,5 +6,5 @@
 | Hassan Tanveer | Log in/out       |
 | #####          | Search           |
 | Feng Wang      | Add/Remove items |
-| #####          | Validation       |
+| Ali Adam        | Validation       |
 | #####          | Frontend         |
