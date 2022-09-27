@@ -1,4 +1,4 @@
-package se452.project.grocery.Entities;
+package se452.project.grocery.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,9 +1,9 @@
-package se452.project.grocery.Services;
+package se452.project.grocery.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import se452.project.grocery.Entities.Item;
-import se452.project.grocery.Repos.ItemRepo;
+import se452.project.grocery.entities.Item;
+import se452.project.grocery.repos.ItemRepo;
 
 @Service
 public class ItemService {
@@ -35,6 +35,15 @@ public class ItemService {
 			}
 		}
 		return false;
+    }
+    
+    
+    public Item findItemByName(String name) {
+    	
+    	if(itemRepo.findItemByName(name)!=null) {
+    		return itemRepo.findItemByName(name);
+    	}
+    	return null;
     }
 
 }

@@ -1,10 +1,10 @@
-package se452.project.grocery.Services;
+package se452.project.grocery.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import se452.project.grocery.Entities.Account;
-import se452.project.grocery.Repos.AccountRepo;
+import se452.project.grocery.entities.Account;
+import se452.project.grocery.repos.AccountRepo;
 
 @Service
 public class AccountService {

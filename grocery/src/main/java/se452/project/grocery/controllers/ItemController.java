@@ -1,4 +1,4 @@
-package se452.project.grocery.Controllers;
+package se452.project.grocery.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 // import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import se452.project.grocery.Entities.Item;
-import se452.project.grocery.Services.ItemService;
+import se452.project.grocery.entities.Item;
+import se452.project.grocery.services.ItemService;
 
 @Controller
 public class ItemController {
@@ -48,4 +48,17 @@ public class ItemController {
 	public String createAccountPage() {
 		return "AddNewItem";
 	}
+	
+	@RequestMapping("/SearchItemPage")
+	public String searchItemPage() {
+		return "searchItemPage";
+	}
+	
+	@RequestMapping("/searchItem")
+	public String returnSearchItem(String name, Model model){
+		Item item = itemService.findItemByName(name);
+		model.addAttribute("item", item);
+		return "searchItemPage";
+	}
+	
 }

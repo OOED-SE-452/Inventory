@@ -1,0 +1,12 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <h1>Search</h1>
+    <form action="/searchItem" method="GET" th:object="${item}">
+    	<label for="name">Item name:</label>
+        <input type="text" name="name"/>
+        <button type="submit">Submit</button>
+        </form>
+        
+        <p th:text="${item}"></p>
+</body>
+</html>
