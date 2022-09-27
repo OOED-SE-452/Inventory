@@ -8,14 +8,14 @@ import se452.project.grocery.Repos.AccountRepo;
 
 @Service
 public class AccountService {
-	
+
 	@Autowired
 	AccountRepo accountRepo;
-	
+
 	public boolean createAccount(Account account) {
-		if(account != null) {
-			if(accountRepo.findAccountByEmail(account.getEmail())==null) {
-				if(account.getEmail()!=null && account.getPassword()!=null) {
+		if (account != null) {
+			if (accountRepo.findAccountByEmail(account.getEmail()) == null) {
+				if (account.getEmail() != null && account.getPassword() != null) {
 					accountRepo.save(account);
 					return true;
 				}
@@ -23,12 +23,11 @@ public class AccountService {
 		}
 		return false;
 	}
-	
+
 	public boolean loginAccount(Account account) {
-		if(account != null) {
-			if(accountRepo.findAccountByEmail(account.getEmail())!=null) {
-				System.out.println("Account pass: " + account.getPassword());
-				if(account.getPassword()
+		if (account != null) {
+			if (accountRepo.findAccountByEmail(account.getEmail()) != null) {
+				if (account.getPassword()
 						.equals(accountRepo.findAccountByEmail(account.getEmail()).getPassword())) {
 					return true;
 				}

@@ -11,26 +11,23 @@ import se452.project.grocery.Services.AccountService;
 
 @Controller
 public class AccountController {
-	
+
 	@Autowired
 	AccountService accountService;
-	
+
 	@PostMapping("/createAccount")
 	public String createAccount(Account account, Model model) {
-		System.out.println(account.getEmail());
-		System.out.println(account.getPassword());
-		
-		boolean accountCreated = accountService.createAccount(account);
-		if(accountCreated) {
-			model.addAttribute("createAccountStatus", "Account created!");
-		}
-		else {
-			model.addAttribute("createAccountStatus", "Account cannot be created!");
 
+		boolean accountCreated = accountService.createAccount(account);
+		if (accountCreated) {
+			model.addAttribute("createAccountStatus", "Account created!");
+		} else {
+			model.addAttribute("createAccountStatus", "Account already exist!");
+			return "createAccountPage";
 		}
 		return "loginPage";
 	}
-	
+
 	@RequestMapping("/createAccountPage")
 	public String createAccountPage() {
 		return "createAccountPage";
