@@ -21,18 +21,18 @@ public class LoginController {
 		return "loginPage";
 	}
 	
-	@PostMapping("/login")
-	public String homePage(Account account, Model model) {
-		System.out.println(account.getEmail());
-		System.out.println(account.getPassword());
-		
-		boolean loggedIn = accountService.loginAccount(account);
-		if(loggedIn) {
-			model.addAttribute("msg", "Welcome");
-			return "homePage";
-		}
-		model.addAttribute("msg", "Wrong info");
-		return "loginPage";
-	}
+//	@PostMapping("/login")
+//	public String homePage(Account account, Model model) {
+//		System.out.println(account.getEmail());
+//		System.out.println(account.getPassword());
+//		
+//		boolean loggedIn = accountService.loginAccount(account);
+//		if(loggedIn) {
+//			model.addAttribute("msg", "Welcome");
+//			return "homePage";
+//		}
+//		model.addAttribute("msg", "Wrong info");
+//		return "loginPage";
+//	}
 
 }
