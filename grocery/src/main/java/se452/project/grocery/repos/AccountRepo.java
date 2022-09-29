@@ -1,8 +1,8 @@
-package se452.project.grocery.Repos;
+package se452.project.grocery.repos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import se452.project.grocery.Entities.Account;
+import se452.project.grocery.entities.Account;
 
 public interface AccountRepo extends JpaRepository<Account, Integer>{
 	
