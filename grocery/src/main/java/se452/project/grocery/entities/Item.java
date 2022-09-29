@@ -1,9 +1,11 @@
 package se452.project.grocery.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table; 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,12 +17,20 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Table
 public class Item {
 	
 	@Id
+	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer uid;
-	private String name;
-	private double price;
 
+	@Column
+	private String name;
+
+	@Column
+	private Double price;
+
+	@Column
+	private Integer quantity;
 }
