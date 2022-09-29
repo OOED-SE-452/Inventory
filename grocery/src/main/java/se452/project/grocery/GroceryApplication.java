@@ -1,4 +1,4 @@
-package se452.project.grocery;
+ package se452.project.grocery;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -35,4 +35,4 @@ public class GroceryApplication {
 	
 
 }
-}
+

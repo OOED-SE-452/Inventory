@@ -1,0 +1,15 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <h1>Adding item</h1>
+    <h1 th:text="${itemAddInfo}"></h1>
+    <form action="/createItem" method="POST" th:object="${item}">
+    	<label for="name">Item name:</label>
+        <input type="text" name="name"/>
+        <label for="price">Price:</label>
+        <input type="Double" name="price" />
+        <label for="quantity">Quantity:</label>
+        <input type="Integer" name="quantity" />
+        <button type="submit">Submit</button>
+        </form>
+</body>
+</html>
