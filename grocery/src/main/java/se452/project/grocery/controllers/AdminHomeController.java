@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import se452.project.grocery.entities.Account;
 import se452.project.grocery.services.AccountService;
 
-@RequestMapping("/user")
+@RequestMapping("/admin")
 @Controller
-public class HomeController {
+public class AdminHomeController {
 	
 	@Autowired
 	AccountService accountService;
@@ -25,15 +25,14 @@ public class HomeController {
 		
 		boolean loggedIn = accountService.loginAccount(account);
 		if(loggedIn) {
-			model.addAttribute("msg", "Welcome");
+			model.addAttribute("msg", "Welcome Admin");
 			session.setAttribute("msg", "hello");
 			return "homePage";
 		}
 		model.addAttribute("msg", "Wrong info");
-		return "loginPage";
+		return "adminLoginPage";
 	}
 	
-
 	
 	
 
