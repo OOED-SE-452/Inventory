@@ -27,7 +27,7 @@ public class AdminHomeController {
 		if(loggedIn) {
 			model.addAttribute("msg", "Welcome Admin");
 			session.setAttribute("msg", "hello");
-			return "homePage";
+			return "adminHomePage";
 		}
 		model.addAttribute("msg", "Wrong info");
 		return "adminLoginPage";
