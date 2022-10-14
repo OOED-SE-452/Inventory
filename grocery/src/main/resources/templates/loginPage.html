@@ -1,13 +1,38 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<body>
-<h1>Login</h1>
+<head>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+
+<div class="container">
 <h1 th:text="${msg}"></h1>
 <h1 th:text="${createAccountStatus}"></h1>
-<form action="/login" method="POST" th:object="${account}">
-<input type="text" name="email"/>
-<input type="password" name="password" />
-<button type="submit">Submit</button>
-</form>
-<a href="/createAccountPage">Create Account</a>
+	<div class = "row text-center">
+	<div class = "col-6 d-flex justify-content-center">
+	<form class="mx-auto"  action="/user/login" method="POST" th:object="${account}">
+		<div class ="form-group">
+			<h3>Admin login</h3>
+			<input class = "row" type="text" name="email" placeholder = "Email"/>
+			<input class = "row" type="password" name="password" placeholder = "Password" />
+			<button class = "row float-right" type="submit">Submit</button>
+		</div>
+	</form>
+	</div>
+	<div class = "col-6 d-flex justify-content-center">
+	<form class="mx-auto" action="/admin/login" method="POST" th:object="${account}">
+		<div class = "form-group">
+			<h3>User login</h3>
+			<input class = "row" type="text" name="email" placeholder = "Email"/>
+			<input class = "row" type="password" name="password" placeholder = "Password" />
+			<button class = "row float-right" type="submit">Submit</button>
+		</div>
+	</form>
+	</div>
+</div>
+</div>
+
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>

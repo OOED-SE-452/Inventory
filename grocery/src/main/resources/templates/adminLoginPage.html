@@ -1,0 +1,23 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<h1>Login</h1>
+<h1 th:text="${msg}"></h1>
+<h1 th:text="${createAccountStatus}"></h1>
+<form action="/user/login" method="POST" th:object="${account}">
+
+<input type="text" name="email"/>
+<input type="password" name="password" />
+
+<button type="submit">Submit</button>
+</form>
+
+<form action="/admin/login" method="POST" th:object="${account}">
+
+<input type="text" name="email"/>
+<input type="password" name="password" />
+
+<button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

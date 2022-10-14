@@ -33,6 +33,7 @@ public class Account {
 	private String email;
 	private String password;
 	
+	
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
