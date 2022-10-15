@@ -26,7 +26,7 @@ public class AdminHomeController {
 		
 		boolean loggedIn = accountService.loginAccount(account);
 		
-		if(loggedIn && accountService.getRole(account)) {
+		if(loggedIn && (accountService.getRole(account)==Role.ADMIN)) {
 			model.addAttribute("msg", "Welcome Admin");
 			session.setAttribute("msg", "hello");
 			return "adminHomePage";

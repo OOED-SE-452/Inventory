@@ -38,16 +38,20 @@ public class AccountService {
 		return false;
 	}
 	
-	public boolean getRole(Account account) {
+	public Role getRole(Account account) {
 		if(account != null) {
 			if(accountRepo.findAccountByEmail(account.getEmail())!=null) {
 				//System.out.println("Account pass: " + account.getPassword());
 				if(accountRepo.findAccountByEmail(account.getEmail()).getRole().equals(Role.ADMIN)) {
-					return true;
+					return Role.ADMIN;
+				}
+				
+				else if (accountRepo.findAccountByEmail(account.getEmail()).getRole().equals(Role.USER)) {
+					return Role.USER;
 				}
 			}
 		}
-		return false;
+		return null;
 	}
 
 }
