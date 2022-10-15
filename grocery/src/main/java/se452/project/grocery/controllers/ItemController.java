@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import se452.project.grocery.entities.Item;
 import se452.project.grocery.services.ItemService;
 
+@RequestMapping("/admin")
 @Controller
 public class ItemController {
 	
