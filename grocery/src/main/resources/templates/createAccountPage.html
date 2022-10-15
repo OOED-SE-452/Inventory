@@ -1,12 +1,36 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
 <body>
-<h1>Create Account</h1>
-<h1 th:text="${createAccountStatus}"></h1>
-<form action="/createAccount" method="POST" th:object="${account}">
-<input type="text" name="email"/>
-<input type="password" name="password" />
-<button type="submit">Submit</button>
-</form>
-<a href="/loginPage">Back</a>
+    <div class = "container">
+    	<ul class="nav justify-content-end">
+  			<li class="nav-item">
+   				<a class="nav-link" href="/admin/homePage">Home</a>
+  			</li>
+  			<li class="nav-item">
+    			<a class="nav-link" href="/logout">Logout</a>
+  			</li>
+ 		</ul>
+ 		
+	  	<div class = "card login-form">
+			<h1 class="card-title text-center">Create Account</h1>
+			<h1 th:text="${createAccountStatus}"></h1>
+			<form class="card-body text-center mx-auto" action="/createAccount" method="POST" th:object="${account}">
+				
+				<div class ="form-group">
+					<input type="text" name="email" placeholder = "Email"/>
+				</div>
+				
+				<div class ="form-group">
+					<input type="password" name="password" placeholder="Password"/>
+				</div>
+				
+				<div class ="form-group float-right">
+					<button type="submit">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

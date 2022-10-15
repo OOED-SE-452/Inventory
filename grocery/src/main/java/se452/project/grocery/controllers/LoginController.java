@@ -1,5 +1,8 @@
 package se452.project.grocery.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,18 +24,11 @@ public class LoginController {
 		return "loginPage";
 	}
 	
-//	@PostMapping("/login")
-//	public String homePage(Account account, Model model) {
-//		System.out.println(account.getEmail());
-//		System.out.println(account.getPassword());
-//		
-//		boolean loggedIn = accountService.loginAccount(account);
-//		if(loggedIn) {
-//			model.addAttribute("msg", "Welcome");
-//			return "homePage";
-//		}
-//		model.addAttribute("msg", "Wrong info");
-//		return "loginPage";
-//	}
+	@RequestMapping("/logout")
+	public String logoutPage(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		session.invalidate();
+		return "loginPage";
+	}
 
 }

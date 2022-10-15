@@ -1,13 +1,51 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
 <body>
+<div class = "container">
+	<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <a class="nav-link" href="/admin/homePage">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/logout">Logout</a>
+  </li>
 
-<h1>Home page</h1>
-<h1 th:text="${msg}"></h1>
-<h1 th:text="${session.msg}"></h1>
-<a href="/AddNewItemPage">Add new item</a>
-<a href="/SearchItemPage">Search</a>
-<a href="/createAccountPage">Create Account</a>
+</ul>
+	<div class = "row justify-content-center">
+		<div class = "card border-1 col-3 m-2">
+			<div class="card-body">
+				<h5 class="card-title text-center"><a href="/admin/AddNewItemPage">Add item</a></h5>
+				
+			</div>
+		</div>
+		
+		<div class = "card border-1 col-3 m-2">
+			<div class="card-body">
+				<h5 class="card-title text-center"><a href="/admin/SearchItemPage">Search item</a></h5>
+				
+			</div>
+		</div>
+		
+		<div class = "card border-1 col-4 m-2">
+			<div class="card-body">
+				<h5 class="card-title text-center"><a href="/admin/createAccountPage">Create Account</a></h5>
+				
+			</div>
+		</div>
 
+	</div>
+	
+
+</div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>
+
+
+
 
