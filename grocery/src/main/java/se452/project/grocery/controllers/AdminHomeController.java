@@ -24,7 +24,6 @@ public class AdminHomeController {
 	@PostMapping("/login")
 	public String homePage(Account account, Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		
 		boolean loggedIn = accountService.loginAccount(account);
 		
 		if(loggedIn && (accountService.getRole(account)==Role.ADMIN)) {

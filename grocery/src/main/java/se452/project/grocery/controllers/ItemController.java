@@ -23,10 +23,7 @@ public class ItemController {
 	public ModelAndView createItem(Item item, Model model) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("AddNewItem");
-
-		System.out.println(item.getName());
-		System.out.println(item.getPrice());
-		
+        
 		boolean itemCreated = itemService.createItem(item);
 		if(itemCreated) {
 			model.addAttribute("itemAddInfo", "item created!");
@@ -58,7 +55,9 @@ public class ItemController {
 	@RequestMapping("/searchItem")
 	public String returnSearchItem(String name, Model model){
 		Item item = itemService.findItemByName(name);
+		
 		model.addAttribute("item", item);
+		
 		return "searchItemPage";
 	}
 	
