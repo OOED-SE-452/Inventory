@@ -1,4 +1,6 @@
 package se452.project.grocery.services;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,5 +47,21 @@ public class ItemService {
     	}
     	return null;
     }
+
+	public void save(Item item) {
+		Item i = itemRepo.findItemByName(item.getName());
+		if(i!=null) {
+			i.setName(item.getName());
+			i.setPrice(item.getPrice());
+			i.setQuantity(item.getQuantity());
+			itemRepo.save(i);
+		}
+	}
+	
+	public List<Item> findAll(){
+		
+		return itemRepo.findAll();
+		
+	}
 
 }
