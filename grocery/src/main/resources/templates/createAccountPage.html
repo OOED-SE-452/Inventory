@@ -16,7 +16,7 @@
 	  	<div class = "card login-form">
 			<h1 class="card-title text-center">Create Account</h1>
 			<h1 th:text="${createAccountStatus}"></h1>
-			<form class="card-body text-center mx-auto" action="/createAccount" method="POST" th:object="${account}">
+			<form class="card-body text-center mx-auto" action="/admin/createAccount" method="POST" th:object="${account}">
 				
 				<div class ="form-group">
 					<input type="text" name="email" placeholder = "Email"/>

@@ -17,6 +17,7 @@ public class AccountService {
 		if(account != null) {
 			if(accountRepo.findAccountByEmail(account.getEmail())==null) {
 				if(account.getEmail()!=null && account.getPassword()!=null) {
+					account.setRole(Role.USER);
 					accountRepo.save(account);
 					return true;
 				}

@@ -1,9 +1,15 @@
 package se452.project.grocery.controllers;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.DeleteMapping; 
 // import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +29,7 @@ public class ItemController {
 	public ModelAndView createItem(Item item, Model model) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("AddNewItem");
-
-		System.out.println(item.getName());
-		System.out.println(item.getPrice());
-		
+        
 		boolean itemCreated = itemService.createItem(item);
 		if(itemCreated) {
 			model.addAttribute("itemAddInfo", "item created!");
@@ -51,15 +54,30 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/SearchItemPage")
-	public String searchItemPage() {
+	public String searchItemPage(Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		List<Item> items = itemService.findAll();
+		model.addAttribute("items", items);
+		session.setAttribute("items", items);
 		return "searchItemPage";
 	}
 	
 	@RequestMapping("/searchItem")
 	public String returnSearchItem(String name, Model model){
 		Item item = itemService.findItemByName(name);
+		
 		model.addAttribute("item", item);
+		
 		return "searchItemPage";
+	}
+	
+	@RequestMapping("/editItem")
+	public String editItem(Item item) {
+		
+		itemService.save(item);
+		
+		return "searchItemPage";
+		
 	}
 	
 }
