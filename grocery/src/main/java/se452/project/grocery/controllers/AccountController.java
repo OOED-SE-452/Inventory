@@ -1,6 +1,10 @@
 package se452.project.grocery.controllers;
 
+import java.sql.SQLException;
+
+import org.apache.catalina.Server;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +37,8 @@ public class AccountController {
 	public String createAccountPage() {
 		return "createAccountPage";
 	}
+	
+
 
 }
 
