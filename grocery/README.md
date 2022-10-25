@@ -3,8 +3,8 @@
 | Member         | Key Feature      |
 | -------------- | ---------------- |
 | Alex Sobieraj  | Create Account   |
-| Hassan Tanveer | Log in/out       |
+| Hassan Tanveer | Frontend and login/logout      
 | Simone Scaratti| Search           |
 | Feng Wang      | Add/Remove items |
 | Ali Adam       | Validation       |
-| #####          | Frontend         |
+| Hassan Tanveer | Frontend         |
