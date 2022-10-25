@@ -31,8 +31,9 @@ public class Account {
 	
 	//Can add @Colum(name="em") to change the table column name
 	private String email;
-	private String password;
-	
+	private String password;	//now password just store a random string
+	private String encryptStr;	
+
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
