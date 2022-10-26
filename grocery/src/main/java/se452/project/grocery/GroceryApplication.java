@@ -31,16 +31,16 @@ public class GroceryApplication {
 	}
 	
 	
-//	@Bean
-//	public CommandLineRunner showLogLevel() {
-//		return (args) -> {
-//			System.out.println(env);
-//			log.debug("Debug");
-//			log.info("Info");
-//			log.warn("Warning");
-//			log.error("Error"); 
-//		};
-		
+	@Bean
+	public CommandLineRunner showLogLevel() {
+		return (args) -> {
+			// System.out.println(env);
+			log.debug("Debug");
+			log.info("Info");
+			log.warn("Warning");
+			log.error("Error"); 
+		};
+	}
 
 	
 		
