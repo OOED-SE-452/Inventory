@@ -2,18 +2,13 @@
 <head>
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 </head>
-<body>
-    <div class = "container">
-    	<ul class="nav justify-content-end">
-  <li class="nav-item">
-    <a class="nav-link" href="/admin/homePage">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/logout">Logout</a>
-  </li>
-  </ul>
-    	<div class = "card login-form">
-	   		<form class="card-body text-center mx-auto" action="/admin/createItem" method="POST" th:object="${item}">
+
+<div class="container">
+Customer Login Page
+</div>
+
+<div class = "card login-form">
+	   		<form class="card-body text-center mx-auto" action="/shop" method="POST" th:object="${item}">
 	   			<div class ="form-group">
 	   			
 	   			<h1 class = "card-title text-center">Add Item</h1>
@@ -38,8 +33,10 @@
 	        		
 	        </form>
         </div>
-        	
-   	</div>     
+        
+        
+        
+
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>

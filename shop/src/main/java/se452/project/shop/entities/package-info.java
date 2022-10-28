@@ -1,0 +1,1 @@
+package se452.project.shop.entities;
