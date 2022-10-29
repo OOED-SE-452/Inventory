@@ -49,10 +49,13 @@ public class ItemController {
 	
 
 
-    @DeleteMapping("/deleteItem")  
-    private void removeItem(Item item, Model model)   
+    @RequestMapping("/deleteItem")  
+    private String removeItem(Item item, Model model)   
     {  
+    	System.out.println(item);
         itemService.removeItem(item);  
+        
+        return "redirect:/admin/SearchItemPage";
     } 
 
 	@RequestMapping("/AddNewItemPage")
@@ -63,6 +66,7 @@ public class ItemController {
 	
 	@RequestMapping("/SearchItemPage")
 	public String searchItemPage(Model model, HttpServletRequest req) {
+		model.addAttribute("item", new Item());
 		HttpSession session = req.getSession();
 		List<Item> items = itemService.findAll();
 		model.addAttribute("items", items);
@@ -80,11 +84,12 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/editItem")
-	public String editItem(Item item) {
-		
+	public String editItem(Item item, Model model) {
+		//model.addAttribute("item", new Item());
+		System.out.println(item);
 		itemService.save(item);
 		
-		return "searchItemPage";
+		return "redirect:/admin/SearchItemPage";
 		
 	}
 	

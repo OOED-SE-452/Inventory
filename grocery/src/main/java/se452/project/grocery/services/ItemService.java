@@ -35,12 +35,10 @@ public class ItemService {
     public boolean removeItem(Item item){
     	
     	Item findItem = itemRepo.findItemByName(item.getName());
-    	
+    	System.out.println(findItem);
         if(item != null) {
-			if(findItem == null) { // why if null? If already null there is no need to delete.
-                itemRepo.delete(item);
-					return true;				
-			}
+			itemRepo.delete(findItem);
+			return true;
 		}
 		return false;
     }
