@@ -31,8 +31,8 @@ public class AdminHomeController {
 			session.setAttribute("msg", "hello");
 			return "adminHomePage";
 		}
-		model.addAttribute("msg", "Wrong info");
-		return "adminLoginPage";
+		model.addAttribute("msgAdmin", "Wrong info");
+		return "loginPage";
 	}
 	
 	@GetMapping("/homePage")

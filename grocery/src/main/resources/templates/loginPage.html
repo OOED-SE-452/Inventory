@@ -4,8 +4,6 @@
 </head>
 
 <div class="container">
-<h1 th:text="${msg}"></h1>
-<h1 th:text="${createAccountStatus}"></h1>
 
 <div class="card text-center mx-auto border-0">
 <h1 class="card-title">Inventory</h1>
@@ -14,7 +12,7 @@
 		<div class = "card login-form border-0">
 			<form class="card-body text-center mx-auto"  action="/admin/login" method="POST" th:object="${account}">
 				<div class ="form-group">
-					
+						<h2 style="color:red;" th:text="${msgAdmin}"></h2>
 						<h3 class="card-title">Admin login</h3>
 						
 						<div class ="form-group">
@@ -33,7 +31,7 @@
 		<div class = "card login-form border-0">
 			<form class="card-body text-center mx-auto" action="/user/login" method="POST" th:object="${account}">
 				<div class ="form-group">
-					
+						<h2 style="color:red;" th:text="${msg}"></h2>
 						<h3 class="card-title">User login</h3>
 						
 						<div class ="form-group">
