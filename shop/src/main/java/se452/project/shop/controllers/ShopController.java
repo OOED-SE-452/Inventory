@@ -1,11 +1,15 @@
 package se452.project.shop.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,6 +20,7 @@ import se452.project.grocery.repos.ItemRepo;
 import se452.project.grocery.services.AccountService;
 import se452.project.grocery.services.ItemService;
 import se452.project.shop.entities.CustomerAccount;
+import se452.project.shop.entities.CustomerItem;
 import se452.project.shop.services.CustomerAccountServices;
 
 @Controller
@@ -57,13 +62,15 @@ public class ShopController {
 	public String homePage(CustomerAccount account, Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		boolean loggedIn = accountService.loginAccount(account);
-		
+		List<Item> allItems = new ArrayList<>();
+		allItems.addAll(itemrepo.findAll());
 		if(loggedIn) {
-			session.setAttribute("msg", "hello");
+			session.setAttribute("allItems",allItems);
+			session.setAttribute("user", account.getUsername());
 			return "RedirectPage";
 		}
 		model.addAttribute("msg", "Wrong info");
-		return "RedirectPage";
+		return "loginPage";
 	}
 	
 	@RequestMapping("/createShopAccount")
@@ -86,6 +93,38 @@ public class ShopController {
 			return "createAccountPage";
 		}
 		return "loginPage";
+	}
+	
+	
+	@GetMapping("/RedirectPageNav")
+	public String homePageNav() {
+		return "RedirectPage";
+	}
+	
+	@GetMapping("/shoppingCart")
+	public String shoppingCart() {
+		return "shoppingCartPage";
+	}
+	
+	@GetMapping("/addToCart")
+	public String addToCart(Item item, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String user = (String) session.getAttribute("user");
+		
+		
+		List<CustomerItem> userItems = new ArrayList<>();
+		
+		List<CustomerItem> user_Itemss = accountService.addItemToCart(user, item);
+		
+		if(user_Itemss!=null) {
+		
+		userItems.addAll(user_Itemss);
+		System.out.println(userItems.size());
+		session.setAttribute("userItemss", userItems); 
+		}
+		
+		return "shoppingCartPage";
+		
 	}
 
 }

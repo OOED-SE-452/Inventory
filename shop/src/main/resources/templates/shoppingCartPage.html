@@ -1,0 +1,92 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+
+<meta charset="ISO-8859-1">
+<title>My Cart</title>
+</head>
+<body>
+<div class="container">
+<div class="row">
+ <div class="col-3 mr-4" th:each = "items : ${session.userItemss}">
+
+	<div>
+		<div class="card col-8" style="width: 18rem;">
+			<div class="card-body mx-auto">
+				<h5 class="card-title" th:text="${items.name}"></h5>
+				<p class="card-text"></p>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" th:attrappend="data-target=${items}">Buy now</button>
+			</div>
+		</div>
+	</div>
+<div th:attrappend="id=${items}" class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class = "card login-form">
+	   		<form class="card-body text-center mx-auto" action="/buyItem" th:method="get" th:object="${item}">
+	   		
+	   			<div class ="form-group">
+	   			
+	   			<h1 th:if="${items}!=null" class = "card-title text-center" th:text ="${items.name}"></h1>
+	   			
+	   				<div class ="form-group">
+	   					<div class="form-group mb-1">
+	   						<input type="text" name="card-num" placeholder="1234 5678 9012 3457" size="17" id="cno" minlength="19" maxlength="19">
+						</div>
+	   					
+		        		<input hidden="true"  type="text" name="name" placeholder = "Name" th:value="${items.name}" />
+		        		<input hidden="true"  type="number" name="price" th:value="${items.price}" placeholder = "Price" />
+		        		<input hidden="true"  type="number" name="quantity" th:value="${items.quantity}" placeholder = "Quantity"  />
+
+		     		
+					<div class ="form-group float-right">
+		        		<button class="btn btn-danger" type="submit">Submit</button>
+		        	</div>
+		        	</div>
+		        	
+		        </div>
+	        		
+	        </form>
+        </div>
+          
+ 
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+     
+
+    </div>
+  </div>
+</div>
+
+
+
+</div> 
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

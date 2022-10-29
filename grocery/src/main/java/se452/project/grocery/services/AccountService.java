@@ -14,8 +14,11 @@ public class AccountService {
 	AccountRepo accountRepo;
 	
 	public boolean createAccount(Account account) {
+		
+		Account findAccount = accountRepo.findAccountByEmail(account.getEmail());
+		
 		if(account != null) {
-			if(accountRepo.findAccountByEmail(account.getEmail())==null) {
+			if(findAccount == null) {
 				if(account.getEmail()!=null && account.getPassword()!=null) {
 					account.setRole(Role.USER);
 					accountRepo.save(account);
@@ -27,11 +30,14 @@ public class AccountService {
 	}
 	
 	public boolean loginAccount(Account account) {
+		
+		Account findAccount = accountRepo.findAccountByEmail(account.getEmail());
+		
 		if(account != null) {
-			if(accountRepo.findAccountByEmail(account.getEmail())!=null) {
+			if(findAccount!=null) {
 				//System.out.println("Account pass: " + account.getPassword());
 				if(account.getPassword()
-						.equals(accountRepo.findAccountByEmail(account.getEmail()).getPassword())) {
+						.equals(findAccount.getPassword())) {
 					return true;
 				}
 			}
@@ -40,14 +46,17 @@ public class AccountService {
 	}
 	
 	public Role getRole(Account account) {
+		
+		Account findAccount = accountRepo.findAccountByEmail(account.getEmail());
+		
 		if(account != null) {
-			if(accountRepo.findAccountByEmail(account.getEmail())!=null) {
+			if(findAccount!=null) {
 				//System.out.println("Account pass: " + account.getPassword());
-				if(accountRepo.findAccountByEmail(account.getEmail()).getRole().equals(Role.ADMIN)) {
+				if(findAccount.getRole().equals(Role.ADMIN)) {
 					return Role.ADMIN;
 				}
 				
-				else if (accountRepo.findAccountByEmail(account.getEmail()).getRole().equals(Role.USER)) {
+				else if (findAccount.getRole().equals(Role.USER)) {
 					return Role.USER;
 				}
 			}

@@ -16,14 +16,16 @@
 	  	<div class = "card login-form">
 			<h1 class="card-title text-center">Create Account</h1>
 			<h1 th:text="${createAccountStatus}"></h1>
-			<form class="card-body text-center mx-auto" action="/admin/createAccount" method="POST" th:object="${account}">
+			<form class="card-body text-center mx-auto" action="#" th:action="@{/admin/createAccount}" method="POST" th:object="${account}">
 				
 				<div class ="form-group">
-					<input type="text" name="email" placeholder = "Email"/>
+					<label style="color:red;" for="name" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></label></br>
+					<input  th:field="*{email}" type="text" name="email" placeholder = "Email" />
 				</div>
 				
 				<div class ="form-group">
-					<input type="password" name="password" placeholder="Password"/>
+				<label style="color:red;" for="name" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" ></label></br>
+					<input th:field="*{password}" type="password" name="password" placeholder="Password (min 8)"/>
 				</div>
 				
 				<div class ="form-group float-right">

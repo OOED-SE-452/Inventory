@@ -2,11 +2,15 @@ package se452.project.grocery.controllers;
 
 import java.sql.SQLException;
 
+import javax.validation.Valid;
+
 import org.apache.catalina.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,8 +24,12 @@ public class AccountController {
 	AccountService accountService;
 	
 	@PostMapping("/createAccount")
-	public String createAccount(Account account, Model model) {
+	public String createAccount(@Valid @ModelAttribute("account") Account account, BindingResult bindResult, Model model) {
 
+		if(bindResult.hasErrors()) {
+			return "createAccountPage";
+		}
+		
 		boolean accountCreated = accountService.createAccount(account);
 		if(accountCreated) {
 			model.addAttribute("createAccountStatus", "Account created!");
@@ -34,7 +42,8 @@ public class AccountController {
 	}
 	
 	@RequestMapping("/createAccountPage")
-	public String createAccountPage() {
+	public String createAccountPage(Model model) {
+		model.addAttribute("account", new Account());
 		return "createAccountPage";
 	}
 	

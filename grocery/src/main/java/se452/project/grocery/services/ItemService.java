@@ -14,8 +14,11 @@ public class ItemService {
 	ItemRepo itemRepo;
 	
 	public boolean createItem(Item item) {
+		
+		Item findItem = itemRepo.findItemByName(item.getName());
+		
 		if(item != null) {
-			if(itemRepo.findItemByName(item.getName())==null) {
+			if(findItem == null) {
 				if(item.getName()!=null) {
                     if(item.getPrice()<0.00)
                         item.setPrice(0.00);
@@ -30,8 +33,11 @@ public class ItemService {
 	}
 	
     public boolean removeItem(Item item){
+    	
+    	Item findItem = itemRepo.findItemByName(item.getName());
+    	
         if(item != null) {
-			if(itemRepo.findItemByName(item.getName())==null) {
+			if(findItem == null) { // why if null? If already null there is no need to delete.
                 itemRepo.delete(item);
 					return true;				
 			}
@@ -42,8 +48,10 @@ public class ItemService {
     
     public Item findItemByName(String name) {
     	
-    	if(itemRepo.findItemByName(name)!=null) {
-    		return itemRepo.findItemByName(name);
+    	Item findItem = itemRepo.findItemByName(name);
+    	
+    	if(findItem!=null) {
+    		return findItem;
     	}
     	return null;
     }
