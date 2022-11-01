@@ -9,7 +9,7 @@
 <body>
 <div class="container">
 <div class="row">
- <div class="col-3 mr-4" th:each = "items : ${session.userItemss}">
+ <div class="col-3 mr-4" th:each = "items : ${session.allCusItems}">
 
 	<div>
 		<div class="card col-8" style="width: 18rem;">
@@ -21,11 +21,11 @@
 		</div>
 	</div>
 	
-<div th:attrappend="id=${items}" class="modal" id="myModal">
+<!-- <div th:attrappend="id=${items}" class="modal" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <!-- Modal Header -->
+      Modal Header
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
@@ -69,7 +69,7 @@
 
     </div>
   </div>
-</div>
+</div> -->
 
 
 
