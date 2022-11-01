@@ -26,7 +26,7 @@ public class AccountService {
 	@Autowired
 	AccountRepo accountRepo;
 
-	private String salt = "ff1234";
+	private String salt = "SE 452";
 	// private char chars[] = "0123456789abcdef".toCharArray();
 	private char chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ".toCharArray();
 
@@ -36,42 +36,13 @@ public class AccountService {
 				if(accountRepo.findAccountByEmail(account.getEmail())==null) {
 					if(account.getEmail()!=null && account.getPassword()!=null) {
 						log.info("input account: "+account.getEmail());
-
+						if(account.getRole()==null) account.setRole(Role.ADMIN);
 						//convert password to hex format via hash function
-						String password = toHash(account.getPassword());
-						log.info("input pw: "+account.getPassword());
-						log.info("input pw hash val: "+password);
-						log.info("input role: "+account.getRole());
-
+						String hashVal = toHash(salt + account.getPassword());
 						account.setPassword(randomString(16));
-						log.info("generate random str replace pw: "+account.getPassword());
+						log.info("replace pw: "+account.getPassword());
+						account.setVerified(toHash(hashVal+account.getPassword()));
 
-						byte randomByte[] = Base64.getDecoder().decode(toHash(account.getPassword()));
-						log.info("trans to random: "+randomByte.toString());
-						BytesEncryptor  en = Encryptors.standard(password,salt);
-						log.info("set en: "+en.toString());
-
-						byte encryptByte[] = en.encrypt(randomByte);
-						log.info("encry random: "+encryptByte.toString());
-
-						String encryptStr = Base64.getEncoder().encodeToString(encryptByte);
-						log.info("generate Encrypt str: "+encryptStr);
-
-
-						account.setEncryptStr(encryptStr);
-						log.info("set Encrypt str: "+account.getEncryptStr());
-
-
-						BytesEncryptor  en2 = Encryptors.standard(password,salt);
-						log.info("set en: "+en2.toString());
-
-						byte encryptByte2[] = en2.encrypt(randomByte);
-						log.info("encry random: "+encryptByte2.toString());
-
-						String encryptStr2 = Base64.getEncoder().encodeToString(encryptByte2);
-						log.info("generate Encrypt str: "+encryptStr2);
-						String encryptStr3 = Base64.getEncoder().encodeToString(encryptByte2);
-						log.info("generate Encrypt str: "+encryptStr3);
 						accountRepo.save(account);
 						return true;
 					}
@@ -87,31 +58,12 @@ public class AccountService {
 	public boolean loginAccount(Account input) {
 		if(input != null) {
 			if(accountRepo.findAccountByEmail(input.getEmail())!=null) {
-				//System.out.println("Account pass: " + account.getPassword());
-				// if(account.getPassword()
-				// 		.equals(accountRepo.findAccountByEmail(account.getEmail()).getPassword())) {
-				// 	return true;
-				// }
+
 				Account record = accountRepo.findAccountByEmail(input.getEmail());
-				log.info("login pw :"+input.getPassword());
-				String pwTohash = toHash(input.getPassword());
-				log.info("login hash :"+pwTohash);
-				byte randomByte[] = Base64.getDecoder().decode(toHash(record.getPassword()));
-				log.info("trans to random: "+randomByte.toString());
-				BytesEncryptor  en = Encryptors.standard(pwTohash,salt);
-				log.info("set en: "+en.toString());
+				String hashVal = toHash(salt + input.getPassword());
+				boolean verified = toHash(hashVal+record.getPassword()).equals(record.getVerified());
 
-				byte encryptByte[] = en.encrypt(randomByte);
-				log.info("encry random: "+encryptByte.toString());
-
-				String encryptStr = Base64.getEncoder().encodeToString(encryptByte);
-				log.info("generate Encrypt str: "+encryptStr);
-
-				String accountEn = record.getEncryptStr();
-				log.info("saved Encrypt :"+accountEn);
-				log.info("compare:"+encryptStr.equals(accountEn));
-
-				return encryptStr.equals(accountEn);
+				return verified;
 			}
 		}
 		return false;
