@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,35 +28,45 @@ public class ItemController {
 	ItemService itemService;
 	
 	 @PostMapping("/createItem")
-	public ModelAndView createItem(Item item, Model model) {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("AddNewItem");
-        
+	public ModelAndView createItem(@Valid Item item, BindingResult result, Model model) {
+		 ModelAndView mv = new ModelAndView();
+	        mv.setViewName("AddNewItem");
+
+		 if(result.hasErrors()) {
+			 return mv;
+		 }
+		 
+       
 		boolean itemCreated = itemService.createItem(item);
-		if(itemCreated) {
-			model.addAttribute("itemAddInfo", "item created!");
-		}
-		else {
-			model.addAttribute("itemAddInfo", "item already exist!");
-		}
+		
+		  if(itemCreated)
+		  { model.addAttribute("itemAddInfo", "Created!"); } 
+		  else
+		  { model.addAttribute("itemAddInfo", "Item exist!"); }
+		 
 		return mv;
 	}
 	
 
 
-    @DeleteMapping("/deleteItem")  
-    private void removeItem(Item item, Model model)   
+    @RequestMapping("/deleteItem")  
+    private String removeItem(Item item, Model model)   
     {  
+    	System.out.println(item);
         itemService.removeItem(item);  
+        
+        return "redirect:/admin/SearchItemPage";
     } 
 
 	@RequestMapping("/AddNewItemPage")
-	public String createAccountPage() {
+	public String createAccountPage(Model model) {
+		model.addAttribute("item", new Item());
 		return "AddNewItem";
 	}
 	
 	@RequestMapping("/SearchItemPage")
 	public String searchItemPage(Model model, HttpServletRequest req) {
+		model.addAttribute("item", new Item());
 		HttpSession session = req.getSession();
 		List<Item> items = itemService.findAll();
 		model.addAttribute("items", items);
@@ -72,11 +84,12 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/editItem")
-	public String editItem(Item item) {
-		
+	public String editItem(Item item, Model model) {
+		//model.addAttribute("item", new Item());
+		System.out.println(item);
 		itemService.save(item);
 		
-		return "searchItemPage";
+		return "redirect:/admin/SearchItemPage";
 		
 	}
 	

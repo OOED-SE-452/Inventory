@@ -10,6 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.lang.NonNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,10 +36,14 @@ public class Account {
 	private Integer uid;
 	
 	//Can add @Colum(name="em") to change the table column name
+	@NotNull
+	@NotBlank
+	@Email(message = "Email not valid")
 	private String email;
-	private String password;	//now password just store a random string
-	private String encryptStr;	
-
+	
+	@Min(value = 8, message = "Not Enough characters")
+	private String password;
+	
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
