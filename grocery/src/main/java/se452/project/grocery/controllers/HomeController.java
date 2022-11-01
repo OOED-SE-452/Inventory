@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.log4j.Log4j2;
 import se452.project.grocery.Role;
 import se452.project.grocery.entities.Account;
 import se452.project.grocery.services.AccountService;
 
+@Log4j2
 @RequestMapping("/user")
 @Controller
 public class HomeController {
@@ -25,11 +27,15 @@ public class HomeController {
 		HttpSession session = req.getSession();
 		
 		boolean loggedIn = accountService.loginAccount(account);
+		log.info("account login state: "+loggedIn);
+
 		if(loggedIn && (accountService.getRole(account)==Role.USER)) {
+			log.info("login success");
 			model.addAttribute("msg", "Welcome USER");
 			session.setAttribute("msg", "hello");
 			return "homePage";
 		}
+		log.info("login failed");
 		model.addAttribute("msg", "Wrong info");
 		return "loginPage";
 	}
