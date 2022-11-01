@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import se452.project.grocery.Role;
 import se452.project.grocery.entities.Account;
 import se452.project.grocery.entities.Item;
+import se452.project.grocery.repos.AccountRepo;
 import se452.project.grocery.repos.ItemRepo;
 import se452.project.grocery.services.AccountService;
 import se452.project.grocery.services.ItemService;
 import se452.project.shop.entities.CustomerAccount;
 import se452.project.shop.entities.CustomerItem;
+import se452.project.shop.repos.CustomerAccountRepos;
 import se452.project.shop.services.CustomerAccountServices;
 
 @Controller
@@ -29,8 +31,12 @@ public class ShopController {
 	
 	@Autowired
 	ItemService itemService;
+	
 	@Autowired
 	ItemRepo itemrepo;
+	
+	@Autowired
+	CustomerAccountRepos customerRepo;
 	
 	@Autowired
 	CustomerAccountServices accountService;
@@ -60,8 +66,11 @@ public class ShopController {
 	
 	@PostMapping("/RedirectPage")
 	public String homePage(CustomerAccount account, Model model, HttpServletRequest req) {
+		
 		HttpSession session = req.getSession();
+		
 		boolean loggedIn = accountService.loginAccount(account);
+		
 		List<Item> allItems = new ArrayList<>();
 		allItems.addAll(itemrepo.findAll());
 		if(loggedIn) {
@@ -102,7 +111,16 @@ public class ShopController {
 	}
 	
 	@GetMapping("/shoppingCart")
-	public String shoppingCart() {
+	public String shoppingCart(HttpServletRequest req) {
+		
+		HttpSession session = req.getSession();
+		
+		String user = (String) session.getAttribute("user");
+		
+		CustomerAccount ca = customerRepo.findCustomerAccountByUsername(user);
+		System.out.println(ca);
+		session.setAttribute("allCusItems", ca.getShoppingCart());
+		
 		return "shoppingCartPage";
 	}
 	
@@ -120,7 +138,7 @@ public class ShopController {
 		
 		userItems.addAll(user_Itemss);
 		System.out.println(userItems.size());
-		session.setAttribute("userItemss", userItems); 
+		session.setAttribute("allCusItems", userItems); 
 		}
 		
 		return "shoppingCartPage";

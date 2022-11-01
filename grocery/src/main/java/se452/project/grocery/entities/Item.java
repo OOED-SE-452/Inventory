@@ -1,5 +1,7 @@
 package se452.project.grocery.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +27,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Table
-public class Item {
+public class Item implements Serializable {
 	
 	@Id
 	@Column
