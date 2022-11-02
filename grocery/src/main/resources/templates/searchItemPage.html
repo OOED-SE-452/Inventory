@@ -50,7 +50,7 @@
 
       <div class="modal-body">
         <div class = "card login-form">
-	   		<form class="card-body text-center mx-auto" action="/admin/editItem" th:method="get" th:object="${item}">
+	   		<form th:if="${item}!=null" class="card-body text-center mx-auto" action="/admin/editItem" th:method="get" th:object="${item}">
 	   		
 	   			<div class ="form-group mx-auto">
 	   			
@@ -124,11 +124,6 @@
         </table>   --> 
         </div>
         
-
-        
-        
-
-
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
