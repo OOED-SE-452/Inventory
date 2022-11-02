@@ -62,7 +62,7 @@ public class AccountService {
 				Account record = accountRepo.findAccountByEmail(input.getEmail());
 				String hashVal = toHash(salt + input.getPassword());
 				boolean verified = toHash(hashVal+record.getPassword()).equals(record.getVerified());
-
+				log.info("login "+verified);
 				return verified;
 			}
 		}
