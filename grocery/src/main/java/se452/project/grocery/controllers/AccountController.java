@@ -40,7 +40,7 @@ public class AccountController {
 			model.addAttribute("createAccountStatus", "Account already exist!");
 			return "createAccountPage";
 		}
-		return "loginPage";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/createAccountPage")

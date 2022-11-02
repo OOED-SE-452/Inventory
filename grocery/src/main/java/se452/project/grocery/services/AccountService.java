@@ -52,8 +52,11 @@ public class AccountService {
 		}
 		return false;
 	}
-	
-	public boolean loginAccount(Account input) {
+	/**
+	 * @param input account
+	 * @return -1 if account password incorrect, other wise will return account uid
+	 */
+	public int loginAccount(Account input) {
 		if(input != null) {
 			if(accountRepo.findAccountByEmail(input.getEmail())!=null) {
 
@@ -61,10 +64,11 @@ public class AccountService {
 				String hashVal = toHash(salt + input.getPassword());
 				boolean verified = toHash(hashVal+record.getPassword()).equals(record.getVerified());
 				log.info("login "+verified);
-				return verified;
+				if(verified) return record.getUid();
+				return -1;
 			}
 		}
-		return false;
+		return -1;
 	}
 	
 	public Role getRole(Account account) {
@@ -82,7 +86,9 @@ public class AccountService {
 		}
 		return null;
 	}
-		
+	public Account getAccount(int uid) {
+		return accountRepo.findAccountByUid(uid);
+	}	
 	private String randomString(int strSize){
 		SecureRandom secureRandom = new SecureRandom();
 		StringBuffer sb = new StringBuffer();
