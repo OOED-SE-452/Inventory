@@ -36,7 +36,8 @@ public class AccountService {
 				if(accountRepo.findAccountByEmail(account.getEmail())==null) {
 					if(account.getEmail()!=null && account.getPassword()!=null) {
 						log.info("input account: "+account.getEmail());
-						if(account.getRole()==null) account.setRole(Role.ADMIN);
+						//if(account.getRole()==null) account.setRole(Role.USER);
+						account.setRole(Role.USER);
 						//convert password to hex format via hash function
 						String hashVal = toHash(salt + account.getPassword());
 						account.setPassword(randomString(16));

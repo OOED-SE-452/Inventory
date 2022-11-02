@@ -41,9 +41,12 @@ public class Account {
 	@NotBlank
 	@Email(message = "Email not valid")
 	private String email;
-	
+
+	//we will using a random 16 length str to replace user password
 	@Size(min = 8, message = "Not Enough characters")
 	private String password;
+
+	//concate salt and input to generate a hashvalue, then concate hashvalue and the random password to generate this verified hashvalue
 	private String verified;
 	
 	@Enumerated(EnumType.STRING)
