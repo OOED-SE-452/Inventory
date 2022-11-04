@@ -28,14 +28,14 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build 
-      run: mvn -B -DskipTests clean package
+      run: mvn -B -DskipTests clean package install
       
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: .
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        branch: mvn-repo
+        branch: main
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
