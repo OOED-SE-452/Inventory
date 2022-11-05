@@ -28,8 +28,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build 
-      run: mvn -B -DskipTests clean package install
-      
+      run: echo $Username
+#       mvn -B -DskipTests clean package install
+      env: 
+        Username: ${{ secrets.DOCKER_USERNAME }}
+        
     - uses: mr-smithers-excellent/docker-build-push@v5
       name: Build & push Docker image
       with:
