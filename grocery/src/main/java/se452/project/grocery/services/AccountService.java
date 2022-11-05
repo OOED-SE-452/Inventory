@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.log4j.Log4j2;
 
+
 //import org.springframework.security.crypto.encrypt.BytesEncryptor;
 //import org.springframework.security.crypto.encrypt.Encryptors;
 
@@ -36,7 +37,8 @@ public class AccountService {
 				if(accountRepo.findAccountByEmail(account.getEmail())==null) {
 					if(account.getEmail()!=null && account.getPassword()!=null) {
 						log.info("input account: "+account.getEmail());
-						if(account.getRole()==null) account.setRole(Role.ADMIN);
+						//if(account.getRole()==null) account.setRole(Role.USER);
+						account.setRole(Role.USER);
 						//convert password to hex format via hash function
 						String hashVal = toHash(salt + account.getPassword());
 						account.setPassword(randomString(16));
@@ -54,19 +56,23 @@ public class AccountService {
 		}
 		return false;
 	}
-	
-	public boolean loginAccount(Account input) {
+	/**
+	 * @param input account
+	 * @return -1 if account password incorrect, other wise will return account uid
+	 */
+	public int loginAccount(Account input) {
 		if(input != null) {
 			if(accountRepo.findAccountByEmail(input.getEmail())!=null) {
 
 				Account record = accountRepo.findAccountByEmail(input.getEmail());
 				String hashVal = toHash(salt + input.getPassword());
 				boolean verified = toHash(hashVal+record.getPassword()).equals(record.getVerified());
-
-				return verified;
+				log.info("login "+verified);
+				if(verified) return record.getUid();
+				return -1;
 			}
 		}
-		return false;
+		return -1;
 	}
 	
 	public Role getRole(Account account) {
@@ -84,7 +90,9 @@ public class AccountService {
 		}
 		return null;
 	}
-		
+	public Account getAccount(int uid) {
+		return accountRepo.findAccountByUid(uid);
+	}	
 	private String randomString(int strSize){
 		SecureRandom secureRandom = new SecureRandom();
 		StringBuffer sb = new StringBuffer();

@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.log4j.Log4j2;
 import se452.project.grocery.Role;
 import se452.project.grocery.entities.Account;
 import se452.project.grocery.services.AccountService;
 
+@Log4j2
 @RequestMapping("/admin")
 @Controller
 public class AdminHomeController {
@@ -23,12 +25,11 @@ public class AdminHomeController {
 	
 	@PostMapping("/login")
 	public String homePage(Account account, Model model, HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		boolean loggedIn = accountService.loginAccount(account);
-		
-		if(loggedIn && (accountService.getRole(account)==Role.ADMIN)) {
-			model.addAttribute("msg", "Welcome Admin");
-			session.setAttribute("msg", "hello");
+		int uid = accountService.loginAccount(account);
+		boolean loggedIn = uid>=0;
+		account = accountService.getAccount(uid);
+		if(loggedIn && account.getRole()==Role.ADMIN) {
+			req.getSession().setAttribute("UID",uid);
 			return "adminHomePage";
 		}
 		model.addAttribute("msgAdmin", "Wrong info");
@@ -36,8 +37,18 @@ public class AdminHomeController {
 	}
 	
 	@GetMapping("/homePage")
-	public String homePageLanding() {
-		return "adminHomePage";
+	public String homePageLanding(Model model, HttpSession  session) {
+		try{
+			Object obj = session.getAttribute("UID");
+		
+			if(accountService.getAccount((int)obj).getRole()==Role.ADMIN)
+				return "adminHomePage";
+			return "redirect:/";
+
+		}
+		catch(Exception e){
+			return "redirect:/";
+		}
 	}
 	
 	

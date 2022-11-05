@@ -24,19 +24,19 @@ public class HomeController {
 	
 	@PostMapping("/login")
 	public String homePage(Account account, Model model, HttpServletRequest req) {
-		HttpSession session = req.getSession();
+		// HttpSession session = req.getSession();
 		
-		boolean loggedIn = accountService.loginAccount(account);
-		log.info("account login state: "+loggedIn);
+		// boolean loggedIn = accountService.loginAccount(account);
+		// log.info("account login state: "+loggedIn);
 
-		if(loggedIn && (accountService.getRole(account)==Role.USER)) {
-			log.info("login success");
-			model.addAttribute("msg", "Welcome USER");
-			session.setAttribute("msg", "hello");
-			return "homePage";
-		}
-		log.info("login failed");
-		model.addAttribute("msg", "Wrong info");
+		// if(loggedIn && (accountService.getRole(account)==Role.USER)) {
+		// 	log.info("login success");
+		// 	model.addAttribute("msg", "Welcome USER");
+		// 	session.setAttribute("msg", "hello");
+		// 	return "homePage";
+		// }
+		// log.info("login failed");
+		// model.addAttribute("msg", "Wrong info");
 		return "loginPage";
 	}
 	
