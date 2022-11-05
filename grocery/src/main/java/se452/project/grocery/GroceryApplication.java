@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import lombok.extern.log4j.Log4j2;
 import se452.project.grocery.entities.*;
@@ -16,11 +17,12 @@ import se452.project.grocery.entities.*;
 @Log4j2
 @SpringBootApplication
 @EnableJpaRepositories
+@EnableMongoRepositories
 public class GroceryApplication {
 
 	
 	/*
-	 * @Value("${env}") private String env;
+	 * @Value("${}") private String env;
 	 */
 	
 	

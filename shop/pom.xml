@@ -36,12 +36,17 @@
 			<artifactId>grocery</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.5.0</version>
+</dependency>
 		
 
 		
 	</dependencies>
 
-    <build>
+      <build>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -56,5 +61,6 @@
             </plugins>
         </pluginManagement>
     </build>
+
 
 </project>
