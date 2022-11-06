@@ -29,7 +29,7 @@ public class AccountController {
 	public String createAccount(@Valid @ModelAttribute("account") Account account, BindingResult bindResult, Model model) {
 
 		if(bindResult.hasErrors()) {
-			return "createAccountPage";
+			return "createAccountPage"; 
 		}
 		
 		boolean accountCreated = accountService.createAccount(account);
