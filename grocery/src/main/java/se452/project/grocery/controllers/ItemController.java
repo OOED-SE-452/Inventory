@@ -67,7 +67,7 @@ public class ItemController {
 			HttpSession session = req.getSession();
 			Object obj = session.getAttribute("UID");
 		
-			if(accountService.getAccount((int)obj).getRole()==Role.ADMIN)
+			if(accountService.getAccount((int)obj).getRole()==Role.USER)
 				return "redirect:/";
 			model.addAttribute("item", new Item());
 			return "AddNewItem";
@@ -85,7 +85,7 @@ public class ItemController {
 			HttpSession session = req.getSession();
 			Object obj = session.getAttribute("UID");
 		
-			if(accountService.getAccount((int)obj).getRole()==Role.ADMIN)
+			if(accountService.getAccount((int)obj).getRole()==Role.USER)
 				return "redirect:/";
 			model.addAttribute("item", new Item());
 			List<Item> items = itemService.findAll();
@@ -112,11 +112,13 @@ public class ItemController {
 	@RequestMapping("/editItem")
 	public String editItem(Item item, Model model) {
 		//model.addAttribute("item", new Item());
-		System.out.println(item);
-		itemService.save(item);
-		
+		try{
+			System.out.println(item);
+			itemService.save(item);
+		}
+		catch(Exception e){}
 		return "redirect:/admin/SearchItemPage";
-		
+
 	}
 	
 }

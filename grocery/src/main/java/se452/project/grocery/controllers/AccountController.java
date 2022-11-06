@@ -41,7 +41,7 @@ public class AccountController {
 			model.addAttribute("createAccountStatus", "Account already exist!");
 			return "createAccountPage";
 		}
-		return "redirect:/";
+		return "redirect:/admin/homePage";
 	}
 	
 	@RequestMapping("/createAccountPage")
@@ -50,7 +50,7 @@ public class AccountController {
 		try{
 			Object obj = session.getAttribute("UID");
 		
-			if(accountService.getAccount((int)obj).getRole()==Role.ADMIN)
+			if(accountService.getAccount((int)obj).getRole()==Role.USER)
 				return "redirect:/";
 			model.addAttribute("account", new Account());
 			return "createAccountPage";
