@@ -2,6 +2,7 @@ package se452.project.grocery.controllers;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.catalina.Server;
@@ -44,9 +45,20 @@ public class AccountController {
 	}
 	
 	@RequestMapping("/createAccountPage")
-	public String createAccountPage(Model model) {
-		model.addAttribute("account", new Account());
-		return "createAccountPage";
+	public String createAccountPage(Model model, HttpSession  session) {
+
+		try{
+			Object obj = session.getAttribute("UID");
+		
+			if(accountService.getAccount((int)obj).getRole()==Role.ADMIN)
+				return "redirect:/";
+			model.addAttribute("account", new Account());
+			return "createAccountPage";
+
+		}
+		catch(Exception e){
+			return "redirect:/";
+		}
 	}
 }
 
