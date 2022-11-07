@@ -34,7 +34,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
        image: asobiera/ooed-se-452
-       tags: grocery
+       tags: v1, latest
        registry: docker.io
        dockerfile: grocery/Dockerfile
        username: ${{ secrets.DOCKER_USERNAME }}
@@ -44,7 +44,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
        image: asobiera/ooed-se-452
-       tags: shop
+       tags: v1, latest
        registry: docker.io
        dockerfile: shop/Dockerfile
        username: ${{ secrets.DOCKER_USERNAME }}
