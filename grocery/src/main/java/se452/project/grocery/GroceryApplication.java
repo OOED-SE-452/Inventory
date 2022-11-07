@@ -16,7 +16,7 @@ import se452.project.grocery.entities.*;
 
 @Log4j2
 @SpringBootApplication
-@EnableJpaRepositories
+//@EnableJpaRepositories
 @EnableMongoRepositories
 public class GroceryApplication {
 

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.log4j.Log4j2;
 import se452.project.grocery.Role;
 import se452.project.grocery.entities.Account;
+import se452.project.grocery.entities.AccountMango;
 import se452.project.grocery.services.AccountService;
+import se452.project.grocery.services.AccountServiceMango;
 
 @Log4j2
 @RequestMapping("/admin")
@@ -21,10 +23,10 @@ import se452.project.grocery.services.AccountService;
 public class AdminHomeController {
 	
 	@Autowired
-	AccountService accountService;
+	AccountServiceMango accountService;
 	
 	@PostMapping("/login")
-	public String homePage(Account account, Model model, HttpServletRequest req) {
+	public String homePage(AccountMango account, Model model, HttpServletRequest req) {
 		int uid = accountService.loginAccount(account);
 		boolean loggedIn = uid>=0;
 		account = accountService.getAccount(uid);

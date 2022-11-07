@@ -18,17 +18,19 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import se452.project.grocery.entities.Item;
+import se452.project.grocery.entities.ItemMango;
 import se452.project.grocery.services.ItemService;
+import se452.project.grocery.services.ItemServiceMango;
 
 @RequestMapping("/admin")
 @Controller
 public class ItemController {
 	
 	@Autowired
-	ItemService itemService;
+	ItemServiceMango itemService;
 	
 	 @PostMapping("/createItem")
-	public ModelAndView createItem(@Valid Item item, BindingResult result, Model model) {
+	public ModelAndView createItem(@Valid ItemMango item, BindingResult result, Model model) {
 		 ModelAndView mv = new ModelAndView();
 	        mv.setViewName("AddNewItem");
 
@@ -50,7 +52,7 @@ public class ItemController {
 
 
     @RequestMapping("/deleteItem")  
-    private String removeItem(Item item, Model model)   
+    private String removeItem(ItemMango item, Model model)   
     {  
     	System.out.println(item);
         itemService.removeItem(item);  
@@ -60,7 +62,7 @@ public class ItemController {
 
 	@RequestMapping("/AddNewItemPage")
 	public String createAccountPage(Model model) {
-		model.addAttribute("item", new Item());
+		model.addAttribute("item", new ItemMango());
 		return "AddNewItem";
 	}
 	
@@ -68,7 +70,7 @@ public class ItemController {
 	public String searchItemPage(Model model, HttpServletRequest req) {
 		model.addAttribute("item", new Item());
 		HttpSession session = req.getSession();
-		List<Item> items = itemService.findAll();
+		List<ItemMango> items = itemService.findAll();
 		model.addAttribute("items", items);
 		session.setAttribute("items", items);
 		return "searchItemPage";
@@ -76,7 +78,7 @@ public class ItemController {
 	
 	@RequestMapping("/searchItem")
 	public String returnSearchItem(String name, Model model){
-		Item item = itemService.findItemByName(name);
+		ItemMango item = itemService.findItemByName(name);
 		
 		model.addAttribute("item", item);
 		
@@ -84,7 +86,7 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/editItem")
-	public String editItem(Item item, Model model) {
+	public String editItem(ItemMango item, Model model) {
 		//model.addAttribute("item", new Item());
 		System.out.println(item);
 		itemService.save(item);

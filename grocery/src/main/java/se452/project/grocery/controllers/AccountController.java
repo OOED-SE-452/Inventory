@@ -17,16 +17,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import se452.project.grocery.Role;
 import se452.project.grocery.entities.Account;
+import se452.project.grocery.entities.AccountMango;
 import se452.project.grocery.services.AccountService;
+import se452.project.grocery.services.AccountServiceMango;
 @RequestMapping("/admin")
 @Controller
 public class AccountController {
 	
 	@Autowired
-	AccountService accountService;
+	AccountServiceMango accountService;
 	
 	@PostMapping("/createAccount")
-	public String createAccount(@Valid @ModelAttribute("account") Account account, BindingResult bindResult, Model model) {
+	public String createAccount(@Valid @ModelAttribute("account") AccountMango account, BindingResult bindResult, Model model) {
 
 		if(bindResult.hasErrors()) {
 			return "createAccountPage"; 
