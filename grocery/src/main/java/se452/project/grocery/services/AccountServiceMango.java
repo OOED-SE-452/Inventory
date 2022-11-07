@@ -12,9 +12,6 @@ import lombok.extern.log4j.Log4j2;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Base64;
-
-import javax.crypto.Cipher;
 
 import se452.project.grocery.Role;
 import se452.project.grocery.entities.AccountMango;
