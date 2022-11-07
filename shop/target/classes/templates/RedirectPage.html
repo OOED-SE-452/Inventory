@@ -1,0 +1,89 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+
+<div class="container">
+<h1 th:text="${session.user}"></h1>
+<!-- Customer Login Page
+
+
+<div class = "card login-form">
+	   		<form class="card-body text-center mx-auto" action="/shop" method="POST" th:object="${item}">
+	   			<div class ="form-group">
+	   			
+	   			<h1 class = "card-title text-center">Add Item</h1>
+	   			
+	   				<div class ="form-group">
+		        		<input  type="text" name="name" placeholder = "Name" />
+		        	</div>
+		        	
+		        	<div class ="form-group">
+		        		<input  type="number" name="price" placeholder = "Price" />
+		        	</div>
+		        	
+		        	<div class ="form-group">
+		        		<input  type="number" name="quantity" placeholder = "Quantity"  />
+		        	</div>
+		     		
+					<div class ="form-group float-right">
+		        		<button type="submit">Submit</button>
+		        	</div>
+		        	
+		        </div>
+	        		
+	        </form>
+        </div> -->
+        
+        
+        <div class="row ">
+        	<div class="col-4">
+        		<a class="btn btn-primary" href = "/RedirectPageNav">Home</a>
+        	</div>
+        	<div class="col-4">
+        		<a class="btn btn-primary" href = "/shoppingCart">Cart</a>
+        	</div>
+        
+        </div>
+        
+
+	   		
+	   			<div class="row">
+		        		<div class="col-3" th:text="Name"></div>
+						<div class="col-3" th:text="Price"></div>
+						<div class="col-3" th:text="Quantity"></div> 
+
+		        		<div class="col-3" ></div>
+
+		        		</div>
+	   			<div class ="form-group mt-3" th:each="item : ${session.allItems}">
+	   			<form class="card-body text-center mx-auto" action="/addToCart" th:method="get" th:object="${item}">
+	   					<div class="row">
+		        		<div class="col-3" th:text="${item.name}"></div>
+		        		<input hidden="true"  type="text" name="name" placeholder = "Name" th:value="${item.name}" />
+						<div class="col-3" th:text="${item.price}"></div>
+						<input hidden="true"  type="text" name="price" placeholder = "Name" th:value="${item.price}" />
+						<div class="col-3" th:text="${item.quantity}"></div> 
+						<input hidden="true"  type="text" name="quantity" placeholder = "Name" th:value="${item.quantity}" />
+
+		        		<button  class="btn btn-danger col-1" type="submit">Add</button>
+
+		        		</div>
+		        </form>
+        	</div>
+	        		
+	       
+        
+        
+        
+        
+</div>
+        
+        
+        
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
