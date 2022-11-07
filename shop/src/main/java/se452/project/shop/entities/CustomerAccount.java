@@ -30,6 +30,7 @@ public class CustomerAccount {
 	
 	private String username;
 	private String password;
+	private String verified;
 	
 	@OneToMany
     private List<CustomerItem> shoppingCart = new ArrayList<>();

@@ -58,8 +58,10 @@ public class ItemService {
 		Item i = itemRepo.findItemByName(item.getName());
 		if(i!=null) {
 			i.setName(item.getName());
-			i.setPrice(item.getPrice());
-			i.setQuantity(item.getQuantity());
+			if(item.getPrice()!=null)
+				i.setPrice(item.getPrice());
+			if(item.getQuantity()!=null)
+				i.setQuantity(item.getQuantity());
 			itemRepo.save(i);
 		}
 	}

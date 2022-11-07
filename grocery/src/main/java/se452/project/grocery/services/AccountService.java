@@ -28,7 +28,6 @@ public class AccountService {
 	AccountRepo accountRepo;
 
 	private String salt = "SE 452";
-	// private char chars[] = "0123456789abcdef".toCharArray();
 	private char chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ".toCharArray();
 
 	public boolean createAccount(Account account) {

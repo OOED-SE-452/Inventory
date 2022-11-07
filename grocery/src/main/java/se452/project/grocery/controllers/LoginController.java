@@ -30,7 +30,7 @@ public class LoginController {
 	public String logoutPage(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		session.invalidate();
-		return "loginPage";
+		return "redirect:/";
 	}
 // 	@RequestMapping("/error")
 // 	public String handleError(HttpServletRequest request) {

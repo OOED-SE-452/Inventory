@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 // import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import se452.project.grocery.Role;
 import se452.project.grocery.entities.Item;
+import se452.project.grocery.services.AccountService;
 import se452.project.grocery.services.ItemService;
 
 @RequestMapping("/admin")
@@ -26,7 +28,8 @@ public class ItemController {
 	
 	@Autowired
 	ItemService itemService;
-	
+	@Autowired
+	AccountService accountService;
 	 @PostMapping("/createItem")
 	public ModelAndView createItem(@Valid Item item, BindingResult result, Model model) {
 		 ModelAndView mv = new ModelAndView();
@@ -59,19 +62,42 @@ public class ItemController {
     } 
 
 	@RequestMapping("/AddNewItemPage")
-	public String createAccountPage(Model model) {
-		model.addAttribute("item", new Item());
-		return "AddNewItem";
+	public String createAccountPage(Model model, HttpServletRequest req) {
+		try{
+			HttpSession session = req.getSession();
+			Object obj = session.getAttribute("UID");
+		
+			if(accountService.getAccount((int)obj).getRole()==Role.USER)
+				return "redirect:/";
+			model.addAttribute("item", new Item());
+			return "AddNewItem";
+
+		}
+		catch(Exception e){
+			return "redirect:/";
+		}
 	}
 	
 	@RequestMapping("/SearchItemPage")
 	public String searchItemPage(Model model, HttpServletRequest req) {
-		model.addAttribute("item", new Item());
-		HttpSession session = req.getSession();
-		List<Item> items = itemService.findAll();
-		model.addAttribute("items", items);
-		session.setAttribute("items", items);
-		return "searchItemPage";
+
+		try{
+			HttpSession session = req.getSession();
+			Object obj = session.getAttribute("UID");
+		
+			if(accountService.getAccount((int)obj).getRole()==Role.USER)
+				return "redirect:/";
+			model.addAttribute("item", new Item());
+			List<Item> items = itemService.findAll();
+			model.addAttribute("items", items);
+			session.setAttribute("items", items);
+			return "searchItemPage";
+
+		}
+		catch(Exception e){
+			return "redirect:/";
+		}
+		
 	}
 	
 	@RequestMapping("/searchItem")
@@ -86,11 +112,13 @@ public class ItemController {
 	@RequestMapping("/editItem")
 	public String editItem(Item item, Model model) {
 		//model.addAttribute("item", new Item());
-		System.out.println(item);
-		itemService.save(item);
-		
+		try{
+			System.out.println(item);
+			itemService.save(item);
+		}
+		catch(Exception e){}
 		return "redirect:/admin/SearchItemPage";
-		
+
 	}
 	
 }
