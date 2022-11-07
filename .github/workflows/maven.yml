@@ -38,7 +38,7 @@ jobs:
        registry: docker.io
        dockerfile: grocery/Dockerfile
        username: ${{ secrets.DOCKER_USERNAME }}
-       password: ${{ secrets.DOCKER_PASSWORD }}\
+       password: ${{ secrets.DOCKER_PASSWORD }}
        
     - name: Build & push Docker image SHOP
       uses: mr-smithers-excellent/docker-build-push@v5
