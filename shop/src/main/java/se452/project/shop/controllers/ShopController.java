@@ -68,8 +68,8 @@ public class ShopController {
 	public String homePage(CustomerAccount account, Model model, HttpServletRequest req) {
 		
 		HttpSession session = req.getSession();
-		
-		boolean loggedIn = accountService.loginAccount(account);
+		int state = accountService.loginAccount(account);
+		boolean loggedIn = state>=0;
 		
 		List<Item> allItems = new ArrayList<>();
 		allItems.addAll(itemrepo.findAll());
