@@ -1,3 +1,4 @@
 FROM eclipse-temurin:17-alpine
-ADD target/springboot-docker-grocery.jar springboot-docker-grocery.jar
-ENTRYPOINT ["java","-jar", "springboot-docker-grocery.jar"]
+ARG JAR_FILE=target/springboot-docker-grocery-exe.jar
+ADD ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar", "/app.jar"]
