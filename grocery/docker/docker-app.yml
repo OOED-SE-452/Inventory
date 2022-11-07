@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: demo-app
+    image: asobiera/ooed-se-452
+    env_file: ./.env
+    ports:
+      - "$SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT"
+      

@@ -1,0 +1,131 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class= "container">
+
+    	<ul class="nav justify-content-end">
+	 		<li class="nav-item">
+	    		<a class="nav-link" href="/admin/homePage">Home</a>
+	 		</li>
+  			<li class="nav-item">
+    			<a class="nav-link" href="/logout">Logout</a>
+  			</li>
+  		</ul>
+  		
+  		<div class = "card login-form">
+  		
+    		<!-- <h1 class = "card-title text-center">Search</h1>
+    		
+    		<form class="card-body text-center mx-auto" action="/admin/searchItem" method="GET" th:object="${item}">
+    			<div class ="form-group">
+       	 			<input type="text" name="name" placeholder = "Name"/>	
+       	 		</div>
+       	 		
+       	 		<div class ="form-group float-right">
+        			<button type="submit">Submit</button>
+       			</div>
+        	</form> -->
+        	
+        <table class="table">
+        
+        	<thead>
+        		<tr>
+        			<th>Name</th>
+        			<th>Price</th>
+        			<th>Quantity</th>
+        		</tr>
+        	</thead>
+        	
+        	<tbody>
+        		<tr th:each="i : ${session.items}">
+        			<td th:text="${i.name}"></td>
+        			<td th:text="${i.price}"></td>
+        			<td th:text="${i.quantity}"></td>
+        			<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" th:attrappend="data-target=${i}">Edit Item</button></td>
+    <div th:attrappend="id=${i}" class="modal" id="myModal">
+	<div class="modal-dialog">
+	<div class="modal-content">
+
+      <div class="modal-body">
+        <div class = "card login-form">
+	   		<form th:if="${item}!=null" class="card-body text-center mx-auto" action="/admin/editItem" th:method="get" th:object="${item}">
+	   		
+	   			<div class ="form-group mx-auto">
+	   			
+	   			<h1 th:if="${item}!=null" class = "card-title text-center" th:text ="${i.name}"></h1>
+	   			
+	   				<div class ="form-group">
+		        		<input hidden="true"  type="text" name="name" placeholder = "Name" value="${i.name}" th:value="${i.name}" />
+		        	</div>
+		        	
+		        	<div class ="form-group">
+		        		<input  type="number" name="price" th:value="${item.price}" placeholder = "Price" />
+		        	</div>
+		        	
+		        	<div class ="form-group">
+		        		<input  type="number" name="quantity" th:value="${item.quantity}" placeholder = "Quantity"  />
+		        	</div>
+		     		
+					<div class ="form-group float-right">
+		        		<button class="btn btn-danger" type="submit">Submit</button>
+		        	</div>
+		        	
+		        </div>
+	        		
+	        </form>
+	        <form class="card-body text-center mx-auto" action="/admin/deleteItem" th:method="get" th:object="${item}">
+	        	
+	        	<div class ="form-group">
+		        		<input hidden="true"  type="text" name="name" placeholder = "Name" value="${i.name}" th:value="${i.name}" />
+		        </div>
+	        <div class ="form-group float-left">
+		        		<button class="btn btn-danger" type="submit">Delete</button>
+		        	</div>
+	        </form>
+        </div>
+
+
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+     
+
+    </div>
+  </div>
+</div>   
+        		</tr>
+        	</tbody>
+        </table> 
+                  
+
+        </div>
+        
+<!-- 		<table class="table">
+        	<thead>
+        		<tr>
+        			<th>Name</th>
+        			<th>Price</th>
+        			<th>Quantity</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        		<tr th:each="i : ${item}">
+        			<td th:text="${i.name}"></td>
+        			<td th:text="${i.price}"></td>
+        			<td th:text="${i.quantity}"></td>
+        			<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" th:attrappend="data-target=${item}">Edit Item</button></td>
+        		</tr>
+        	</tbody>
+        </table>   --> 
+        </div>
+        
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
