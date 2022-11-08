@@ -1,6 +1,6 @@
 /**
  * @author Feng Wang
- * Account creation and login with security, initial version of ItemService
+ * Account creation and login with security, initial version of ItemService, fix on item save
  */
 /**
  * 
