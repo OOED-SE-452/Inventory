@@ -5,9 +5,9 @@ import java.util.List;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerAccount {
+public class CustomerMangoAccount {
 
 	
 	@Id
@@ -31,7 +31,7 @@ public class CustomerAccount {
 	private String password;
 	private String verified;
 	
-	@OneToMany
-    private List<CustomerItem> shoppingCart = new ArrayList<>();
+	@DBRef
+    private List<CustomerMangoItem> shoppingCart = new ArrayList<>();
 	
 }

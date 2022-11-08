@@ -1,11 +1,8 @@
 package se452.project.shop.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,23 +12,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+
 @Document
 @Data
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerAccount {
-
+@ToString
+public class CustomerMangoItem {
 	
 	@Id
+	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String cid;
+	private String uid;
 	
-	private String username;
-	private String password;
-	private String verified;
-	
-	@OneToMany
-    private List<CustomerItem> shoppingCart = new ArrayList<>();
-	
+	@Column
+	private String name;
+
+	@Column
+	private Double price;
+
+	@Column
+	private Integer quantity; 
+
 }

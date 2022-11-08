@@ -19,7 +19,7 @@ public class MongoConfig {
     private Environment env;
 
     @Bean
-    public MongoDatabaseFactory mongoDbFactory() {
+    public MongoDatabaseFactory mongoDbFactorys() {
         log.info("");
         log.info("");
         log.info("");
@@ -33,7 +33,7 @@ public class MongoConfig {
 
 	@Bean
 	public MongoTemplate mongoTemplate() {
-		MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
+		MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactorys());
         log.info("");
         log.info("");
         log.info("");

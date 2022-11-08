@@ -22,9 +22,7 @@ import se452.project.grocery.entities.Item;
 
 import se452.project.grocery.entities.ItemMango;
 
-import se452.project.grocery.services.AccountService;
 import se452.project.grocery.services.AccountServiceMango;
-import se452.project.grocery.services.ItemService;
 import se452.project.grocery.services.ItemServiceMango;
 
 @RequestMapping("/admin")

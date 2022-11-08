@@ -13,33 +13,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import se452.project.grocery.Role;
-import se452.project.grocery.entities.Account;
-import se452.project.grocery.entities.Item;
-import se452.project.grocery.repos.AccountRepo;
-import se452.project.grocery.repos.ItemRepo;
-import se452.project.grocery.services.AccountService;
-import se452.project.grocery.services.ItemService;
-import se452.project.shop.entities.CustomerAccount;
-import se452.project.shop.entities.CustomerItem;
-import se452.project.shop.repos.CustomerAccountRepos;
-import se452.project.shop.services.CustomerAccountServices;
+import se452.project.grocery.entities.ItemMango;
+import se452.project.grocery.repos.ItemMangoRepo;
+import se452.project.grocery.services.ItemServiceMango;
+import se452.project.shop.entities.CustomerMangoAccount;
+import se452.project.shop.entities.CustomerMangoItem;
+import se452.project.shop.repos.CustomerAccountMangoRepo;
+import se452.project.shop.services.CustomerAccountMangoServices;
 
 @Controller
 public class ShopController {
 	
 	
 	@Autowired
-	ItemService itemService;
+	ItemServiceMango itemService;
 	
 	@Autowired
-	ItemRepo itemrepo;
+	ItemMangoRepo itemrepo;
 	
 	@Autowired
-	CustomerAccountRepos customerRepo;
+	CustomerAccountMangoRepo customerRepo;
 	
 	@Autowired
-	CustomerAccountServices accountService;
+	CustomerAccountMangoServices accountService;
 	
 	
 	@RequestMapping("/home")
@@ -51,9 +47,9 @@ public class ShopController {
 	
 	
 	@RequestMapping("/shop")
-	public String shop(Item item) {
+	public String shop(ItemMango item) {
 		
-		Item items = itemService.findItemByName(item.getName());
+		ItemMango items = itemService.findItemByName(item.getName());
 		items.setQuantity(items.getQuantity()+item.getQuantity());
 		itemService.save(items);
 		
@@ -65,13 +61,13 @@ public class ShopController {
 	
 	
 	@PostMapping("/RedirectPage")
-	public String homePage(CustomerAccount account, Model model, HttpServletRequest req) {
+	public String homePage(CustomerMangoAccount account, Model model, HttpServletRequest req) {
 		
 		HttpSession session = req.getSession();
-		int state = accountService.loginAccount(account);
-		boolean loggedIn = state>=0;
+		String state = accountService.loginAccount(account);
+		boolean loggedIn = state!="";
 		
-		List<Item> allItems = new ArrayList<>();
+		List<ItemMango> allItems = new ArrayList<>();
 		allItems.addAll(itemrepo.findAll());
 		if(loggedIn) {
 			session.setAttribute("allItems",allItems);
@@ -91,7 +87,7 @@ public class ShopController {
 	
 	
 	@PostMapping("/createShopAccount")
-	public String createAccount(CustomerAccount account, Model model) {
+	public String createAccount(CustomerMangoAccount account, Model model) {
 
 		boolean accountCreated = accountService.createAccount(account);
 		if(accountCreated) {
@@ -117,7 +113,7 @@ public class ShopController {
 		
 		String user = (String) session.getAttribute("user");
 		
-		CustomerAccount ca = customerRepo.findCustomerAccountByUsername(user);
+		CustomerMangoAccount ca = customerRepo.findCustomerMangoAccountByUsername(user);
 		System.out.println(ca);
 		session.setAttribute("allCusItems", ca.getShoppingCart());
 		
@@ -125,14 +121,14 @@ public class ShopController {
 	}
 	
 	@GetMapping("/addToCart")
-	public String addToCart(Item item, HttpServletRequest req) {
+	public String addToCart(ItemMango item, HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		String user = (String) session.getAttribute("user");
 		
 		
-		List<CustomerItem> userItems = new ArrayList<>();
+		List<CustomerMangoItem> userItems = new ArrayList<>();
 		
-		List<CustomerItem> user_Itemss = accountService.addItemToCart(user, item);
+		List<CustomerMangoItem> user_Itemss = accountService.addItemToCart(user, item);
 		
 		if(user_Itemss!=null) {
 		
