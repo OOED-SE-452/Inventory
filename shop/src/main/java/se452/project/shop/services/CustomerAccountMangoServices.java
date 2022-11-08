@@ -16,7 +16,8 @@ import se452.project.shop.entities.CustomerMangoItem;
 import se452.project.shop.entities.CustomerMangoAccount;
 import se452.project.shop.repos.CustomerAccountMangoRepo;
 import se452.project.shop.repos.CustomerMangoItemListRepo;
-
+import se452.project.grocery.repos.AccountMangoRepo;
+import se452.project.grocery.entities.AccountMango;;
 @Log4j2
 @Service
 public class CustomerAccountMangoServices {
@@ -24,6 +25,9 @@ public class CustomerAccountMangoServices {
 	@Autowired
 	CustomerAccountMangoRepo accountRepos;
 	
+	@Autowired 
+	AccountMangoRepo groceryAccountRepo;
+
 	@Autowired
 	CustomerMangoItemListRepo customerItemListRepo;
 	
@@ -35,7 +39,7 @@ public class CustomerAccountMangoServices {
 
 	public String loginAccount(CustomerMangoAccount account) {
 		if(account != null) {
-			if(accountRepos.findCustomerMangoAccountByUsername(account.getUsername())!=null) {
+			if(findAccountByName(account.getUsername())!=null) {
 
 				CustomerMangoAccount record = accountRepos.findCustomerMangoAccountByUsername(account.getUsername());
 				String hashVal = toHash(salt + account.getPassword());
@@ -97,8 +101,20 @@ public class CustomerAccountMangoServices {
 		return null; 
 		
 	}
-	public CustomerMangoAccount getAccount(String cid) {
-		return accountRepos.findCustomerMangoAccountByUsername(cid);
+	public CustomerMangoAccount findAccountByName(String username) {
+		CustomerMangoAccount CMA = accountRepos.findCustomerMangoAccountByUsername(username);
+		if(CMA==null){
+			AccountMango AM = groceryAccountRepo.findAccountMangoByEmail(username);
+			if(AM!=null){
+				CMA = new CustomerMangoAccount();
+				CMA.setCid(AM.getUid());
+				CMA.setUsername(username);
+				CMA.setPassword(AM.getPassword());
+				CMA.setVerified(AM.getVerified());
+				accountRepos.save(CMA);
+			}
+		}
+		return CMA;
 	}	
 	private String randomString(int strSize){
 		SecureRandom secureRandom = new SecureRandom();
