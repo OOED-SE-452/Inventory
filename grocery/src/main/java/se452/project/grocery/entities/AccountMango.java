@@ -6,7 +6,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -31,7 +32,8 @@ import se452.project.grocery.Role;
 public class AccountMango {
 	
 	@Id
-	private Integer uid;
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	private String uid;
 	
 	//Can add @Colum(name="em") to change the table column name
 	@NotNull

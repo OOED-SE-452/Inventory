@@ -27,8 +27,8 @@ public class AdminHomeController {
 	
 	@PostMapping("/login")
 	public String homePage(AccountMango account, Model model, HttpServletRequest req) {
-		int uid = accountService.loginAccount(account);
-		boolean loggedIn = uid>=0;
+		String uid = accountService.loginAccount(account);
+		boolean loggedIn = uid!="";
 		account = accountService.getAccount(uid);
 		if(loggedIn && account.getRole()==Role.ADMIN) {
 			req.getSession().setAttribute("UID",uid);
@@ -43,7 +43,7 @@ public class AdminHomeController {
 		try{
 			Object obj = session.getAttribute("UID");
 		
-			if(accountService.getAccount((int)obj).getRole()==Role.ADMIN)
+			if(accountService.getAccount((String)obj).getRole()==Role.ADMIN)
 				return "adminHomePage";
 			return "redirect:/";
 

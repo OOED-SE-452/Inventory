@@ -14,7 +14,7 @@ public interface AccountMangoRepo extends MongoRepository<AccountMango, String>{
 	public AccountMango findAccountMangoByEmail(String email);
 	
 	@Query("{uid:'?0'}")
-	public AccountMango findAccountMangoByUid(int uid);
+	public AccountMango findAccountMangoByUid(String uid);
 
 
 }

@@ -74,7 +74,7 @@ public class ItemController {
 			HttpSession session = req.getSession();
 			Object obj = session.getAttribute("UID");
 		
-			if(accountService.getAccount((int)obj).getRole()==Role.USER)
+			if(accountService.getAccount((String)obj).getRole()==Role.USER)
 				return "redirect:/";
 			model.addAttribute("item", new ItemMango());
 			return "AddNewItem";
@@ -91,7 +91,7 @@ public class ItemController {
 			HttpSession session = req.getSession();
 			Object obj = session.getAttribute("UID");
 		
-			if(accountService.getAccount((int)obj).getRole()==Role.USER)
+			if(accountService.getAccount((String)obj).getRole()==Role.USER)
 				return "redirect:/";
 			model.addAttribute("item", new Item());
 			List<ItemMango> items = itemService.findAll();
