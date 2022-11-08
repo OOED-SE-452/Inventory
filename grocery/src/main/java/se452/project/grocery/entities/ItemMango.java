@@ -27,7 +27,7 @@ public class ItemMango implements Serializable {
 	
 	@Id
 	@Column
-	private Integer uid;
+	private String uid;
 
 	@Column(unique = true) //
 	@NotEmpty

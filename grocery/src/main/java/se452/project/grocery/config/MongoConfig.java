@@ -1,6 +1,5 @@
 package se452.project.grocery.config;
 
-import com.mongodb.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,29 +18,16 @@ public class MongoConfig {
     private Environment env;
 
     @Bean
-    public MongoDatabaseFactory mongoDbFactory() {
-        log.info("");
-        log.info("");
-        log.info("");
-        log.info("");
-        log.info("");
-        log.info("");
-        MongoDatabaseFactory fac=  new SimpleMongoClientDatabaseFactory(env.getProperty("spring.data.mongodb.uri"));
-        log.info("new DB");
-        return fac;
+    public MongoDatabaseFactory mongoDbFactorys() {
+        MongoDatabaseFactory factorys=  new SimpleMongoClientDatabaseFactory(env.getProperty("spring.data.mongodb.uri"));
+        log.info("new DB factorys");
+        return factorys;
     }
 
 	@Bean
 	public MongoTemplate mongoTemplate() {
-		MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
-        log.info("");
-        log.info("");
-        log.info("");
-        log.info("");
-        log.info("");
-        log.info(mongoTemplate.getDb().getName());
-    
-        log.info("new TP");
+		MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactorys());
+        log.info("new mongoTemplate "+mongoTemplate.getDb().getName());
 		return mongoTemplate;
 
     }

@@ -45,13 +45,13 @@ public class GroceryApplication {
         return args -> {
 			log.info("check admin...");
 
-			if(accountService.getAccount(10000)==null){
+			if(accountService.getAccount("10000")==null){
 				AccountMango admin = new AccountMango();
 				admin.setEmail("1234@1234");
 				admin.setRole(Role.ADMIN);
 				admin.setPassword("pqjpLXKt1RKmXrTR");
 				admin.setVerified("809878d680061eb986b5fee46e4e7a127e9379630640a0bb55a833614c087d4f");
-				admin.setUid(10000);
+				admin.setUid("10000");
 				log.info(accountRepo.save(admin).toString());
 				log.info("create admin");
 			}

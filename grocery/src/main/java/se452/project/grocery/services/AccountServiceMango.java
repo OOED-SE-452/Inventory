@@ -5,10 +5,6 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.log4j.Log4j2;
 
-
-//import org.springframework.security.crypto.encrypt.BytesEncryptor;
-//import org.springframework.security.crypto.encrypt.Encryptors;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -57,7 +53,7 @@ public class AccountServiceMango {
 	 * @param input account
 	 * @return -1 if account password incorrect, other wise will return account uid
 	 */
-	public int loginAccount(AccountMango input) {
+	public String loginAccount(AccountMango input) {
 		if(input != null) {
 			if(accountRepo.findAccountMangoByEmail(input.getEmail())!=null) {
 
@@ -66,10 +62,10 @@ public class AccountServiceMango {
 				boolean verified = toHash(hashVal+record.getPassword()).equals(record.getVerified());
 				log.info("login "+verified);
 				if(verified) return record.getUid();
-				return -1;
+				return "";
 			}
 		}
-		return -1;
+		return "";
 	}
 	
 	public Role getRole(AccountMango account) {
@@ -87,7 +83,7 @@ public class AccountServiceMango {
 		}
 		return null;
 	}
-	public AccountMango getAccount(int uid) {
+	public AccountMango getAccount(String uid) {
 		return accountRepo.findAccountMangoByUid(uid);
 	}	
 	private String randomString(int strSize){

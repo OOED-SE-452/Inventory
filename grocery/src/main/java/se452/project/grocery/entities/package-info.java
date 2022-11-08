@@ -1,5 +1,6 @@
 /**
- * 
+ * @author Feng Wang
+ * initial version of Item, Account structure, help build annotations for mongo
  */
 /**
  * 

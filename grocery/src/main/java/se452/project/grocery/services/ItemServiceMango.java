@@ -4,10 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import se452.project.grocery.entities.Item;
 import se452.project.grocery.entities.ItemMango;
 import se452.project.grocery.repos.ItemMangoRepo;
-import se452.project.grocery.repos.ItemRepo;
 
 @Service
 public class ItemServiceMango {
@@ -60,8 +58,10 @@ public class ItemServiceMango {
 		ItemMango i = itemRepo.findItemMangoByName(item.getName());
 		if(i!=null) {
 			i.setName(item.getName());
-			i.setPrice(item.getPrice());
-			i.setQuantity(item.getQuantity());
+			if(item.getPrice()!=null)
+				i.setPrice(item.getPrice());
+			if(item.getQuantity()!=null)
+				i.setQuantity(item.getQuantity());
 			itemRepo.save(i);
 		}
 	}
