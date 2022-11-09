@@ -17,17 +17,13 @@ This is an SE452 Project done by Gropu 5 in Autumn quarter of 2022. The goal was
   * Update prior content as necessary (eg scope, tables..), lessons learned, decisions made
   * Add SQL based persistence
   * Add screen shot of working code in Appendix
-  
-2. Code
+ 
 ## Milestone 3: Focus area: Services Layer
 1. Document
  * Update prior content as necessary (eg scope, tables..), lessons learned, decisions made
  * Add Service Laye
-2. Code
- * Updated with services related code
+
 ## Milestone 4: Focus area: No SQL
 1. Document
  * Update prior content as necessary (eg scope, tables..), lessons learned, decisions made
  * Add NoSQL Layer
-2. Code
- * Updated to include restful services with persistence code
