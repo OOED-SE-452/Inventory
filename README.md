@@ -27,3 +27,14 @@ This is an SE452 Project done by Gropu 5 in Autumn quarter of 2022. The goal was
 1. Document
  * Update prior content as necessary (eg scope, tables..), lessons learned, decisions made
  * Add NoSQL Layer
+
+
+# Technologies
+- [Spring](https://docs.spring.io/spring-framework/docs/current/reference/html/)
+  - [MVC](https://www.javatpoint.com/spring-mvc-tutorial#:~:text=A%20Spring%20MVC%20is%20a,Inversion%20of%20Control%2C%20Dependency%20Injection.)
+- [Thymeleaf](https://www.thymeleaf.org/documentation.html)
+- [Bootstrap4](https://getbootstrap.com/)
+- [H2Database](http://www.h2database.com/html/features.html)
+- [Maven](https://maven.apache.org/guides/)
+- [Heroku](https://devcenter.heroku.com/categories/reference)
+- [Docker](https://www.docker.com/)
