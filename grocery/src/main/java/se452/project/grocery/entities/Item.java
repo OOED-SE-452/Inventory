@@ -28,7 +28,7 @@ import lombok.ToString;
 @ToString
 @Table
 public class Item implements Serializable {
-	
+
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)

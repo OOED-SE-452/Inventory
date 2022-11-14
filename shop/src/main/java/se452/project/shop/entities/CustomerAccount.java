@@ -22,16 +22,15 @@ import lombok.ToString;
 @NoArgsConstructor
 public class CustomerAccount {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String cid;
-	
+
 	private String username;
 	private String password;
 	private String verified;
-	
+
 	@OneToMany
-    private List<CustomerItem> shoppingCart = new ArrayList<>();
-	
+	private List<CustomerItem> shoppingCart = new ArrayList<>();
+
 }

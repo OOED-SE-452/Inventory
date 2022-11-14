@@ -7,11 +7,11 @@ import org.springframework.stereotype.Repository;
 import se452.project.shop.entities.CustomerMangoAccount;
 
 @Repository
-public interface CustomerAccountMangoRepo extends MongoRepository<CustomerMangoAccount, String>{
-	
+public interface CustomerAccountMangoRepo extends MongoRepository<CustomerMangoAccount, String> {
+
 	@Query("{username:'?0'}")
 	public CustomerMangoAccount findCustomerMangoAccountByUsername(String username);
-	
+
 	@Query("{cid:'?0'}")
 	public CustomerMangoAccount findCustomerMangoAccountByCid(String cid);
 

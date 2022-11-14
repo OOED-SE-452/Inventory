@@ -8,5 +8,4 @@ public interface CustomerMangoItemListRepo extends MongoRepository<CustomerMango
 
 	public CustomerMangoItem findCustomerMangoItemByName(String name);
 
-	
 }

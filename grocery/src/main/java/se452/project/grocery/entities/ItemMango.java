@@ -24,7 +24,7 @@ import lombok.ToString;
 @ToString
 @Document
 public class ItemMango implements Serializable {
-	
+
 	@Id
 	@Column
 	private String uid;

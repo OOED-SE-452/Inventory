@@ -12,19 +12,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 @Document
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class CustomerMangoItem {
-	
+
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String uid;
-	
+
 	@Column
 	private String name;
 
@@ -32,6 +31,6 @@ public class CustomerMangoItem {
 	private Double price;
 
 	@Column
-	private Integer quantity; 
+	private Integer quantity;
 
 }

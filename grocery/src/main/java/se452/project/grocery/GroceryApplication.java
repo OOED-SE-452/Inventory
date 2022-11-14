@@ -1,51 +1,44 @@
- package se452.project.grocery;
+package se452.project.grocery;
 
-import java.sql.SQLException;
-
-import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import lombok.extern.log4j.Log4j2;
 import se452.project.grocery.entities.*;
-import se452.project.grocery.Role;
 import se452.project.grocery.repos.AccountMangoRepo;
 import se452.project.grocery.services.AccountServiceMango;
+
 @Log4j2
 @SpringBootApplication
-//@EnableJpaRepositories
+// @EnableJpaRepositories
 @EnableMongoRepositories
 public class GroceryApplication {
-	
+
 	@Autowired
 	AccountMangoRepo accountRepo;
 
 	@Autowired
 	AccountServiceMango accountService;
 
-	
 	/*
 	 * @Value("${}") private String env;
 	 */
-	
-	
+
 	public static void main(String[] args) {
-		SpringApplication.run(GroceryApplication.class, args);	
-		
-		
+		SpringApplication.run(GroceryApplication.class, args);
+
 	}
+
 	@Bean
-    CommandLineRunner loadAdmin() throws Exception {
-        return args -> {
+	CommandLineRunner loadAdmin() throws Exception {
+		return args -> {
 			log.info("check admin...");
 
-			if(accountService.getAccount("10000")==null){
+			if (accountService.getAccount("10000") == null) {
 				AccountMango admin = new AccountMango();
 				admin.setEmail("1234@1234");
 				admin.setRole(Role.ADMIN);
@@ -54,11 +47,13 @@ public class GroceryApplication {
 				admin.setUid("10000");
 				log.info(accountRepo.save(admin).toString());
 				log.info("create admin");
+			} else {
+				log.info("has admin");
 			}
-			else{log.info("has admin");}
 
-       };
+		};
 	}
+
 	@Bean
 	public CommandLineRunner showLogLevel() {
 		return (args) -> {
@@ -66,14 +61,8 @@ public class GroceryApplication {
 			log.debug("Debug");
 			log.info("Info");
 			log.warn("Warning");
-			log.error("Error"); 
+			log.error("Error");
 		};
 	}
 
-	
-		
-		
-
 }
-
-

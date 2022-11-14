@@ -1,12 +1,13 @@
-//package se452.project.shop.repos;
+// package se452.project.shop.repos;
 //
-//import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.data.jpa.repository.JpaRepository;
 //
-//import se452.project.shop.entities.CustomerItem;
+// import se452.project.shop.entities.CustomerItem;
 //
-//public interface CustomerItemListRepo extends JpaRepository<CustomerItem, Integer> {
+// public interface CustomerItemListRepo extends JpaRepository<CustomerItem,
+// Integer> {
 //
-//	public CustomerItem findCustomerItemByName(String name);
+// public CustomerItem findCustomerItemByName(String name);
 //
-//	
-//}
+//
+// }
