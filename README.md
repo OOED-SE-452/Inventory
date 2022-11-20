@@ -38,3 +38,13 @@ This is an SE452 Project done by Gropu 5 in Autumn quarter of 2022. The goal was
 - [Maven](https://maven.apache.org/guides/)
 - [Heroku](https://devcenter.heroku.com/categories/reference)
 - [Docker](https://www.docker.com/)
+# Project contribution
+
+| Member         | Key Feature      |
+| -------------- | ---------------- |
+| Alex Sobieraj  | Create Account   |
+| Hassan Tanveer | Frontend,Admin Panel,Security and login/logout     
+| Simone Scaratti| Search           |
+| Feng Wang      | Create Account, Account security, Add/Remove items |
+| Ali Adam       | Validation       |
+
